@@ -105,6 +105,40 @@ svg {
             </div>
       </div>
 
+<!-------------------------------                       -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3>basic example (more thick text)  </h3>
+              <pre name="code" class="brush: xml;">
+
+<g>
+<rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
+      x="0" y="0"
+      width="129" height="20"
+      r="0" rx="0" ry="0"
+      fill="none" stroke="#1300bd"
+      class="mapSvgItem mapSvgRect vehicleLabelRect">
+</rect>
+<text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+<animateMotion  end="indefinite" dur="10s" fill="freeze" path="M 0 0 L 100 100">              </animateMotion>
+</g>
+
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/"> http://jsfiddle.net/IlyaB/y6aryu5m/</a></h3>
+              <svg width="600px" height="200px" viewBox="0 0 600 200"
+                  version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g>
+                      <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+                      <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 14px;   font-weight: bold;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+                       <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+                  </g>
+              <svg>
+        </div>
+  </div>
+
       <!-------------------------------
           <div class="row">
               <div class="col-md-6">
@@ -172,7 +206,7 @@ svg {
                </pre>
         </div>
         <div class="col-md-6 sample">
-          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/1/"> http://jsfiddle.net/IlyaB/y6aryu5m/1/</a></h3>
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/3/">http://jsfiddle.net/IlyaB/y6aryu5m/3/</a></h3>
       <svg width="600px" height="200px" viewBox="0 0 600 200"
             version="1.1" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -185,6 +219,62 @@ svg {
         </div>
   </div>
 
+
+<!-------------------------------                     -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3> base64 as href of image </h3>
+              <pre name="code" class="brush: xml;">
+
+<g>
+<image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="130" height="20" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTMwcHgiIGhlaWdodD0iMjBweCIgdmlld0JveD0iMCAwIDEzMCAyMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDY1LjMyNiA2MTIgNTAyLjE3NCINCgkgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQogICA8cmVjdCBzdHlsZT0iLXdlYmtpdC10YXAtaGlnaGxpZ2h0LWNvbG9yOiByZ2JhKDAsIDAsIDAsIDApOyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEyOSIgaGVpZ2h0PSIyMCIgcj0iMCIgcng9IjAiIHJ5PSIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxMzAwYmQiIGNsYXNzPSJtYXBTdmdJdGVtIG1hcFN2Z1JlY3QgdmVoaWNsZUxhYmVsUmVjdCI+DQogICAgPC9yZWN0Pg0KICAgIDx0ZXh0IHN0eWxlPSItd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7IHRleHQtYW5jaG9yOiBzdGFydDsgZm9udC1zaXplOiAxMnB4OyIgeD0iMiIgeT0iNyIgdGV4dC1hbmNob3I9InN0YXJ0IiB0ZXh0PSJCdWZmYWxvIHNodXR0bGUgLSBEcml2aW5nIiBmb250PSIiIHN0cm9rZT0ibm9uZSIgZmlsbD0iIzEzMDBiZCIgY2xhc3M9Im1hcFN2Z0l0ZW0gdmVoaWNsZUxhYmVsVGV4dCIgZm9udC1zaXplPSIxMnB4Ij48dHNwYW4gZHk9IjUiIHN0eWxlPSItd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7Ij5CdWZmYWxvIHNodXR0bGUgLSBEcml2aW5nPC90c3Bhbj48L3RleHQ+DQo8L3N2Zz4NCg=="/>
+  <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+</g>
+
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/4/"> http://jsfiddle.net/IlyaB/y6aryu5m/4/</a></h3>
+      <svg width="600px" height="200px" viewBox="0 0 600 200"
+            version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+             <g>
+             <image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="130" height="20" xmlns:xlink="http://www.w3.org/1999/xlink"
+             xlink:href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTMwcHgiIGhlaWdodD0iMjBweCIgdmlld0JveD0iMCAwIDEzMCAyMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDY1LjMyNiA2MTIgNTAyLjE3NCINCgkgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQogICA8cmVjdCBzdHlsZT0iLXdlYmtpdC10YXAtaGlnaGxpZ2h0LWNvbG9yOiByZ2JhKDAsIDAsIDAsIDApOyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEyOSIgaGVpZ2h0PSIyMCIgcj0iMCIgcng9IjAiIHJ5PSIwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxMzAwYmQiIGNsYXNzPSJtYXBTdmdJdGVtIG1hcFN2Z1JlY3QgdmVoaWNsZUxhYmVsUmVjdCI+DQogICAgPC9yZWN0Pg0KICAgIDx0ZXh0IHN0eWxlPSItd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7IHRleHQtYW5jaG9yOiBzdGFydDsgZm9udC1zaXplOiAxMnB4OyIgeD0iMiIgeT0iNyIgdGV4dC1hbmNob3I9InN0YXJ0IiB0ZXh0PSJCdWZmYWxvIHNodXR0bGUgLSBEcml2aW5nIiBmb250PSIiIHN0cm9rZT0ibm9uZSIgZmlsbD0iIzEzMDBiZCIgY2xhc3M9Im1hcFN2Z0l0ZW0gdmVoaWNsZUxhYmVsVGV4dCIgZm9udC1zaXplPSIxMnB4Ij48dHNwYW4gZHk9IjUiIHN0eWxlPSItd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7Ij5CdWZmYWxvIHNodXR0bGUgLSBEcml2aW5nPC90c3Bhbj48L3RleHQ+DQo8L3N2Zz4NCg=="/>
+               <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+             </g>
+        </svg>
+        </div>
+  </div>
+
+<!-------------------------------                     -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3> png as href of image </h3>
+              <pre name="code" class="brush: xml;">
+
+<g>
+<image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="132" height="24" xmlns:xlink="http://www.w3.org/1999/xlink"
+xlink:href="img/label.png"/>
+  <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+</g>
+
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/5/"> http://jsfiddle.net/IlyaB/y6aryu5m/5/</a></h3>
+      <svg width="600px" height="200px" viewBox="0 0 600 200"
+            version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+             <g>
+             <image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="132" height="24" xmlns:xlink="http://www.w3.org/1999/xlink"
+             xlink:href="img/label.png"/>
+               <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+             </g>
+        </svg>
+        </div>
+  </div>
 
 
     </div>

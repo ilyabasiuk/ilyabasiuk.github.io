@@ -284,8 +284,9 @@ xlink:href="img/label.png"/>
               <pre name="code" class="brush: xml;">
 
 <g>
-<image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="132" height="24" xmlns:xlink="http://www.w3.org/1999/xlink"
-xlink:href="img/label.png"/>
+  <foreignObject x="0" y="0" width="150" height="26">
+     <div style = "font-size: 12px; color:#1300bd; border: 2px solid #1300bd; padding:2px;" xmlns="http://www.w3.org/1999/xhtml" class ="htmlLabel" >Buffalo shuttle - Driving</div>
+   </foreignObject>
   <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
 </g>
 
@@ -305,10 +306,154 @@ xlink:href="img/label.png"/>
         </svg>
         </div>
   </div>
-<text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
-    </div>
 
-  </div><!-- /.container -->
+
+<!-------------------------------                     -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3>animateTransform instead of animateMotion</h3>
+              <pre name="code" class="brush: xml;">
+
+<g>
+    <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+    <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+		<animateTransform attributeName="transform" begin="0s" dur="10s"       type="translate" to="100 100 " repeatCount="indefinite"/>
+</g>
+
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/7/">http://jsfiddle.net/IlyaB/y6aryu5m/7/</a></h3>
+      <svg width="600px" height="200px" viewBox="0 0 600 200"
+            version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+               <g>
+            <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+    <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+			<animateTransform attributeName="transform" begin="0s" dur="10s"       type="translate" to="100 100 " repeatCount="indefinite"
+			/>
+            </g>
+        </svg>
+        </div>
+  </div>
+
+<!-------------------------------                     -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3>css animation</h3>
+              <pre name="code" class="brush: xml;">
+<style>
+#labelGroup {
+-webkit-animation: myfirst 10s; /* Chrome, Safari, Opera */
+animation: myfirst 10s linear infinite;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+from   {transform:translate3d(0px,0px,0px)}
+to {transform: translate3d(100px,100px,0px)}
+}
+
+/* Standard syntax */
+@keyframes myfirst {
+from   {transform:translate3d(0px,0px,0px)}
+to {transform: translate3d(100px,100px,0px)}
+}
+</style>
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/8/">http://jsfiddle.net/IlyaB/y6aryu5m/8/</a></h3>
+      <style>
+      #labelGroup {
+     -webkit-animation: myfirst 10s; /* Chrome, Safari, Opera */
+    animation: myfirst 10s linear infinite;
+    -webkit-animation-iteration-count: infinite ;
+    animation-iteration-count: infinite ;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+    from   {transform:translate3d(0px,0px,0px)}
+    to {transform: translate3d(100px,100px,0px)}
+}
+
+/* Standard syntax */
+@keyframes myfirst {
+    from   {transform:translate3d(0px,0px,0px)}
+    to {transform: translate3d(100px,100px,0px)}
+}
+      </style>
+      <svg width="600px" height="200px" viewBox="0 0 600 200"
+            version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+
+         <g id="labelGroup">
+            <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+    <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+            </g>
+     </svg>
+        </div>
+  </div>
+
+<!-------------------------------                     -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3>css animation + png image</h3>
+              <pre name="code" class="brush: xml;">
+<style>
+#labelGroup {
+-webkit-animation: myfirst 10s; /* Chrome, Safari, Opera */
+animation: myfirst1 10s linear infinite;
+-webkit-animation-iteration-count: infinite ;
+animation-iteration-count: infinite ;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst1 {
+from   {transform:translate3d(0px,0px,0px)}
+to {transform: translate3d(100px,100px,0px)}
+}
+
+/* Standard syntax */
+@keyframes myfirst1 {
+from   {transform:translate3d(0px,0px,0px)}
+to {transform: translate3d(100px,100px,0px)}
+}
+</style>
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/8/">http://jsfiddle.net/IlyaB/y6aryu5m/8/</a></h3>
+      <style>
+      #labelGroup1 {
+     -webkit-animation: myfirst 10s; /* Chrome, Safari, Opera */
+    animation: myfirst 10s linear infinite;
+    -webkit-animation-iteration-count: infinite ;
+    animation-iteration-count: infinite ;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst1 {
+    from   {transform:translate3d(0px,0px,0px)}
+    to {transform: translate3d(100px,100px,0px)}
+}
+
+/* Standard syntax */
+@keyframes myfirst1 {
+    from   {transform:translate3d(0px,0px,0px)}
+    to {transform: translate3d(100px,100px,0px)}
+}
+      </style>
+      <svg width="600px" height="200px" viewBox="0 0 600 200"
+            version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+
+         <g id="labelGroup1">
+          <image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="132" height="24" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/label.png"></image>
+            </g>
+     </svg>
+        </div>
+  </div>
+
+  </div>
+</div><!-- /.container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

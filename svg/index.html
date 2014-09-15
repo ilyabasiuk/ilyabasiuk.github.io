@@ -69,7 +69,7 @@ svg {
       <div class="starter-template">
         <h1>Different types of moving svg text</h1>
     <!--    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p> -->
-
+http://www.w3.org/TR/SVG/animate.html
 
     <!-------------------------------                       -->
         <div class="row">
@@ -421,7 +421,7 @@ to {transform: translate3d(100px,100px,0px)}
                </pre>
         </div>
         <div class="col-md-6 sample">
-          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/8/">http://jsfiddle.net/IlyaB/y6aryu5m/8/</a></h3>
+          <h3> <a href= ""></a></h3>
       <style>
       #labelGroup1 {
      -webkit-animation: myfirst 10s; /* Chrome, Safari, Opera */
@@ -449,6 +449,61 @@ to {transform: translate3d(100px,100px,0px)}
           <image xmlns="http://www.w3.org/2000/svg" id="image1JPEG" x="0" y="0" width="132" height="24" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="img/label.png"></image>
             </g>
      </svg>
+        </div>
+  </div>
+<!-------------------------------                       -->
+    <div class="row">
+        <div class="col-md-6">
+              <h3>request animation frame </h3>
+              <pre name="code" class="brush: xml;">
+
+<g>
+<rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
+      x="0" y="0"
+      width="129" height="20"
+      r="0" rx="0" ry="0"
+      fill="none" stroke="#1300bd"
+      class="mapSvgItem mapSvgRect vehicleLabelRect">
+</rect>
+<text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+<animateMotion  end="indefinite" dur="10s" fill="freeze" path="M 0 0 L 100 100">              </animateMotion>
+</g>
+
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/"> http://jsfiddle.net/IlyaB/y6aryu5m/</a></h3>
+              <svg width="600px" height="200px" viewBox="0 0 600 200"
+                  version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id = "vehicleGroup2">
+                      <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+                      <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+                  </g>
+              <svg>
+              <script>
+
+                        var label = document.getElementById("vehicleGroup2");
+                         move = function (){
+                            var timePassed =  Date.now() -  startTime,
+                                xOffset = Math.round(verticalSpeed * timePassed),
+                                yOffset = Math.round(horisontalSpeed * timePassed);
+                            if (xOffset <= toX) {
+                             label.setAttribute("transform", "translate (" + xOffset + ", "+ yOffset+")");
+                           } else {
+                             label.setAttribute("transform", "translate (0,0)");
+                             startTime = Date.now();
+                           }
+                           requestAnimationFrame(move);
+                        };
+                        var  duration = 10 * 1000,
+                             toY = 100,
+                             toX = 100,
+                             verticalSpeed = toY/duration,
+                             horisontalSpeed = toX/duration,
+                             startTime = Date.now();
+                        move();
+              </script>
         </div>
   </div>
 

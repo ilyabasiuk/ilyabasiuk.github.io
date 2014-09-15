@@ -108,6 +108,48 @@ http://www.w3.org/TR/SVG/animate.html
 <!-------------------------------                       -->
     <div class="row">
         <div class="col-md-6">
+              <h3>basic example (text-rendering: geometricPrecision ) </h3>
+              <pre name="code" class="brush: xml;">
+
+<style>
+    #labelText {
+        text-rendering: geometricPrecision;
+    }
+    #labelRect {
+        shape-rendering: geometricPrecision;
+    }
+</style>
+<rect id="labelRect" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+<text  id="labelText" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+</g>
+
+               </pre>
+        </div>
+        <div class="col-md-6 sample">
+          <style>
+              #labelText {
+                  text-rendering: geometricPrecision;
+              }
+              #labelRect {
+                  shape-rendering: geometricPrecision;
+              }
+          </style>
+          <h3> <a href= ""> </a></h3>
+              <svg width="600px" height="200px" viewBox="0 0 600 200"
+                  version="1.1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g>
+                      <rect id="labelRect" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+                      <text  id="labelText" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+                       <animateMotion  end="indefinite" dur="10s" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+                  </g>
+              <svg>
+        </div>
+  </div>
+
+<!-------------------------------                       -->
+    <div class="row">
+        <div class="col-md-6">
               <h3>basic example (more thick text)  </h3>
               <pre name="code" class="brush: xml;">
 
@@ -126,7 +168,7 @@ http://www.w3.org/TR/SVG/animate.html
                </pre>
         </div>
         <div class="col-md-6 sample">
-          <h3> <a href= "http://jsfiddle.net/IlyaB/y6aryu5m/"> http://jsfiddle.net/IlyaB/y6aryu5m/</a></h3>
+          <h3> <a href= ""></a></h3>
               <svg width="600px" height="200px" viewBox="0 0 600 200"
                   version="1.1" xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink">

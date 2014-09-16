@@ -1,0 +1,106 @@
+<html>
+  <head>
+
+      <style>
+            .label{
+                position: absolute;
+                text-rendering : optimizeSpeed;
+                transform: translateZ(0);
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .dec {
+                font-size: 12px;
+                color:#1300bd;
+                border: 2px solid #1300bd;
+                padding:2px;
+                width : 125px;
+            }
+
+            svg {
+                background-color : gray;
+            }
+
+            #label2 {
+              -webkit-animation: myfirst1 20s; /* Chrome, Safari, Opera */
+              animation: myfirst1 20s ;
+
+              -webkit-animation-iteration-count: infinite ;
+              animation-iteration-count: infinite ;
+
+              -webkit-animation-timing-function: linear;
+               animation-timing-function: linear;
+            }
+            /* Chrome, Safari, Opera */
+            @-webkit-keyframes myfirst1 {
+            from   {transform:translate3d(0px,0px,0px)}
+            to {transform: translate3d(200px,200px,0px)}
+            }
+
+            /* Standard syntax */
+            @keyframes myfirst1 {
+            from   {transform:translate3d(0px,0px,0px)}
+            to {transform: translate3d(200px,200px,0px)}
+            }
+      </style>
+
+      <script>
+          var label = document.getElementById("test-label");
+           move = function (){
+              var timePassed =  Date.now() -  startTime,
+                  xOffset = verticalSpeed * timePassed,
+                  yOffset = horisontalSpeed * timePassed;
+
+              if (xOffset <= toX ) {
+               label.style.transform = "translate3d("  + xOffset + "px , " + yOffset + "px, 0px)";
+             } else {
+               label.style.transform = "translate3d(0px ,0px, 0px)";
+               startTime = Date.now();
+             }
+             requestAnimationFrame(move);
+          };
+          var  duration = 20 * 1000,
+               toY = 200,
+               toX = 200,
+               verticalSpeed = toY/duration,
+               horisontalSpeed = toX/duration,
+               startTime = Date.now(),
+               startLeft,
+               startTop;
+
+          window.onload =  function(e) {
+              label = document.getElementById("test-label");
+              startLeft = parseInt(label.style.left, 10),
+              startTop = parseInt(label.style.top, 10);
+
+              move();
+          }
+
+      </script>
+  </head>
+  <body>
+
+
+
+  <!--      <svg width="600px" height="200px" viewBox="0 0 600 200"
+     version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id = "label2">
+    <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="0" y="0" width="129" height="20" r="0" rx="0" ry="0" fill="none" stroke="#1300bd" class="mapSvgItem mapSvgRect vehicleLabelRect"></rect>
+    <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="2" y="7" text-anchor="start" text="Buffalo shuttle - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Buffalo shuttle - Driving</tspan></text>
+<animateMotion  end="indefinite" dur="10s" fill="freeze" path="M 0 0 L 100 100">              </animateMotion>
+</g>
+<svg>-->
+<div id = "labelsContainer">
+   <div id= "test-label" class = "label dec" style = "left: 200px; top: 0px;">
+Buffalo shuttle - (raf)
+    </div>
+
+    <div id= "label2" class = "label dec" style = "left: 400px; top: 0px;">
+Buffalo shuttle - (css)
+    </div>
+</div>
+
+
+  </body>
+</html>

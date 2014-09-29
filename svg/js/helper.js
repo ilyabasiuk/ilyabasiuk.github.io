@@ -7,7 +7,9 @@ var perfomansceTestHelper = function (options) {
     count = 0,
     init = function() {
         addBtn.addEventListener("click", add);
+        options.canvas.addEventListener("click", add);
         clearBtn.addEventListener("click", clear)
+
     },
     add = function() {
         var label = templ.cloneNode(true);

@@ -1,0 +1,36 @@
+<html>
+   <head>
+    <title> Old stlye </title>
+    <script src="js/helper.js"></script>
+    <script>
+        function init () {
+          var helper = perfomansceTestHelper({
+             canvas: document.querySelector("svg"),
+             addButton: document.getElementById("addBtn"),
+             clearButton: document.getElementById("clearBtn"),
+             countDisplay : document.getElementById("countLabels")
+          })
+        }
+
+         window.addEventListener('load', init, false )
+    </script>
+    <style>
+        svg  {
+          background-color : grey;
+        }
+    </style>
+   </head>
+
+   <body>
+  <input type ="button" id = "addBtn" value = "Add one"/>
+  <input type ="button" id = "clearBtn" value = "Clear"/>
+  <div id = "countLabels" style = "display: inline; "> </div>
+<br>
+  <svg height="100%" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: absolute; z-index: 1000;">
+    <g transform="rotate(0.01)" style = "display: none;" >
+             <path d="M 0 0 q 65 -2 140 0 q 2 10 0 20 q -65 2 -140 0 q -2 -10 0 -20" stroke="#B8B2EB" stroke-width="1" fill="white"> </path>
+             <text x="2" y="14" fill="#1300bd" font-family="Arial" font-size="12px" font-weight="bold">                        Demo text  Demo text                    </text>
+    </g>
+  </svg>
+   </body>
+<html>

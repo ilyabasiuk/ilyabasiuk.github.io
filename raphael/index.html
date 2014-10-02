@@ -1,0 +1,31 @@
+<html>
+ <head>
+   <script src = "js/raphael-2.1.2.js"></script>
+   <script>
+       function init() {
+          var paper = Raphael(10, 50, 1000, 1000);
+          var toSvgStr = function (command, arrParams){
+                          return command +  " " + arrParams.join(",") + " ";
+                      },
+              rectX = 48,
+              rectY = 40,
+              curveVal = 2;
+
+          for (var i=10; i--;) {
+            var rect = paper.rect(rectX, rectY, 140, 20);
+            console.log(rect.getBBox());
+            if (rect.getBBox().x >50 ) {
+                debugger;
+            }
+            rect.transform("T 50 50")
+
+}
+       }
+       window.addEventListener('load', init, false )
+   </script>
+ </head>
+ <body>
+
+
+ </body>
+</html>

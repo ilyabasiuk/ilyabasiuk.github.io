@@ -1,0 +1,214 @@
+<html>
+   <head>
+       <style>
+          body {
+            margin : 50px;
+          }
+          .mapSvgElement .vehicleLabelRect {
+fill: #fff;
+}
+.mapSvgElement .distanceLabelLine, .mapSvgElement .distanceLabelCircle {
+  stroke-width: 1px;
+  stroke: #fff;
+  shape-rendering: optimizeSpeed;
+  pointer-events: none;
+}
+
+rect {
+  display: none;
+}
+line {
+  stroke:#1300bd;stroke-width:1
+}
+
+       </style>
+
+<script>
+    var shapes = [];
+    var getPointPos = function(point) {
+      var ctm = point.getCTM();
+
+      return {
+          x : +point.getAttribute("cx") + ctm.e,
+          y : +point.getAttribute("cy") + ctm.f
+      }
+    },
+    getTextPos = function(text) {
+      var ctm = text.getCTM();
+
+      return {
+          x : +text.getAttribute("x") + ctm.e,
+          y : +text.getAttribute("y") + ctm.f
+      }
+
+    };
+    function init() {
+        //move();
+        var circles = document.querySelectorAll("circle"),
+            texts = document.querySelectorAll("text"),
+            svg = document.querySelector("svg");
+
+        for (i = circles.length; i--;) {
+            var line =  document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            var pointPos = getPointPos(circles[i]);
+            var textPos = getTextPos(texts[i]);
+            line.setAttribute("x1", pointPos.x);
+            line.setAttribute("y1", pointPos.y);
+            line.setAttribute("x2", textPos.x);
+            line.setAttribute("y2", textPos.y);
+                  svg.appendChild(line);
+            shapes.push({
+               c: circles[i],
+               t: texts[i],
+               l: line
+            })
+        }
+        move();
+    }
+
+
+
+    var  move = function (){
+      shapes.forEach(function(shape) {
+        var line = shape.l;
+        var pointPos = getPointPos(shape.c);
+        var textPos = getTextPos(shape.t);
+        line.setAttribute("x1", pointPos.x);
+        line.setAttribute("y1", pointPos.y);
+
+        line.setAttribute("x2", textPos.x);
+        line.setAttribute("y2", textPos.y);
+      })
+
+       requestAnimationFrame(move);
+    };
+
+
+   window.addEventListener('load', init, false )
+</script>
+   </head>
+   <body>
+  <div id="liveMap_detailsPanelAndMapCanvasLayout">
+    <div class="centerPane liveMapPanel noTranslate" id="liveMap_mapCanvas" style="top: 47px; left: 405px; right: 0px; bottom: 0px; overflow: hidden; visibility: visible;">
+        <svg height="608" version="1.1" width="553" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: absolute; z-index: 1000;" class="mapSvgElement">
+            <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc>
+            <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+
+            <g id = "vehicle1">
+              <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M292 297L269 319L260 301Z" fill="#1300bd" stroke-width="1" stroke="#000000" class="mapSvgItem svgCheckmateVehicles" transform="matrix(1,0,0,1,0,0)">
+              </path>
+
+              <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="-0.5" y="-0.5" width="39.24289229527912" height="2" r="0" rx="0" ry="0" fill="#1300bd" stroke="#000" class="mapSvgItem mapSvgRect distanceLabelLine" transform="matrix(0.4223,-0.9065,0.9065,0.4223,284.4276,299.5719)"></rect>
+              <circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="277" cy="304" r="3" fill="#1300bd" stroke="#000" class="mapSvgItem distanceLabelCircle" transform="matrix(1,0,0,1,0,0)">
+              </circle>
+              <path id="svgLayerId39" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+              <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M301,245Q370.5234375,243,440.046875,245Q442.046875,255,440.046875,265Q370.5234375,267,301,265Q299,255,301,245" fill="none" stroke-width="1" stroke="#604dff" class="mapSvgItem vehicleLabelRect" x="301" y="245" width="123.140625" height="20"></path>
+              <path id="svgLayerId40" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+              <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="303" y="255" text-anchor="start" text="Accident vehicle  - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px">
+                  <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2.when label achives border</tspan>
+              </text>
+                <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "1" path="M 0 0 L 110 -80">              </animateMotion>
+            </g>
+
+
+            <g id = "vehicle2" transform = "translate(0,100)">
+              <g>
+                <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M292 297L269 319L260 301Z" fill="#1300bd" stroke-width="1" stroke="#000000" class="mapSvgItem svgCheckmateVehicles" transform="matrix(1,0,0,1,0,0)">
+                </path>
+                <circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="277" cy="304" r="3" fill="#1300bd" stroke="#000" class="mapSvgItem distanceLabelCircle" transform="matrix(1,0,0,1,0,0)">
+                </circle>
+                <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "1" path="M 0 0 L 260 -189">              </animateMotion>
+              </g>
+              <g>
+                <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="-0.5" y="-0.5" width="39.24289229527912" height="2" r="0" rx="0" ry="0" fill="#1300bd" stroke="#000" class="mapSvgItem mapSvgRect distanceLabelLine" transform="matrix(0.4223,-0.9065,0.9065,0.4223,284.4276,299.5719)"></rect>
+                <path id="svgLayerId39" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M301,245Q370.5234375,243,440.046875,245Q442.046875,255,440.046875,265Q370.5234375,267,301,265Q299,255,301,245" fill="none" stroke-width="1" stroke="#604dff" class="mapSvgItem vehicleLabelRect" x="301" y="245" width="123.140625" height="20"></path>
+                <path id="svgLayerId40" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="303" y="255" text-anchor="start" text="Accident vehicle  - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px">
+                    <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">3.when vehicle achives border, but stop label </tspan>
+                </text>
+                <animateMotion  end="indefinite" dur="5s" fill="freeze" repeatCount =  "1" path="M 0 0 L 110 -80">              </animateMotion>
+              </g>
+            </g>
+
+            <g id = "vehicle3" transform = "translate(0,-100)">
+              <g>
+                <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M292 297L269 319L260 301Z" fill="#1300bd" stroke-width="1" stroke="#000000" class="mapSvgItem svgCheckmateVehicles" transform="matrix(1,0,0,1,0,0)">
+                </path>
+                <circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="277" cy="304" r="3" fill="#1300bd" stroke="#000" class="mapSvgItem distanceLabelCircle" transform="matrix(1,0,0,1,0,0)">
+                </circle>
+                <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "1" path="M 0 0 L 260 -189">              </animateMotion>
+              </g>
+              <g>
+                <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="-0.5" y="-0.5" width="39.24289229527912" height="2" r="0" rx="0" ry="0" fill="#1300bd" stroke="#000" class="mapSvgItem mapSvgRect distanceLabelLine" transform="matrix(0.4223,-0.9065,0.9065,0.4223,284.4276,299.5719)"></rect>
+                <path id="svgLayerId39" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M301,245Q370.5234375,243,440.046875,245Q442.046875,255,440.046875,265Q370.5234375,267,301,265Q299,255,301,245" fill="none" stroke-width="1" stroke="#604dff" class="mapSvgItem vehicleLabelRect" x="301" y="245" width="123.140625" height="20"></path>
+                <path id="svgLayerId40" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="303" y="255" text-anchor="start" text="Accident vehicle  - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px">
+                    <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">1. Basic</tspan>
+                </text>
+                <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "1" path="M 0 0 L 260 -189">     </animateMotion>
+              </g>
+            </g>
+
+            <g id = "vehicle4" transform = "translate(0,300)">
+              <g>
+                <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M292 297L269 319L260 301Z" fill="#1300bd" stroke-width="1" stroke="#000000" class="mapSvgItem svgCheckmateVehicles" transform="matrix(1,0,0,1,0,0)">
+                </path>
+                <circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="277" cy="304" r="3" fill="#1300bd" stroke="#000" class="mapSvgItem distanceLabelCircle" transform="matrix(1,0,0,1,0,0)">
+                </circle>
+                <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "1" path="M 0 0 L 260 -189">              </animateMotion>
+              </g>
+              <g>
+                <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="-0.5" y="-0.5" width="39.24289229527912" height="2" r="0" rx="0" ry="0" fill="#1300bd" stroke="#000" class="mapSvgItem mapSvgRect distanceLabelLine" transform="matrix(0.4223,-0.9065,0.9065,0.4223,284.4276,299.5719)"></rect>
+                <path id="svgLayerId39" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M301,245Q370.5234375,243,440.046875,245Q442.046875,255,440.046875,265Q370.5234375,267,301,265Q299,255,301,245" fill="none" stroke-width="1" stroke="#604dff" class="mapSvgItem vehicleLabelRect" x="301" y="245" width="123.140625" height="20"></path>
+                <path id="svgLayerId40" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="303" y="255" text-anchor="start" text="Accident vehicle  - Driving" font="" stroke="none" fill="#1300bd" class="mapSvgItem vehicleLabelText" font-size="12px">
+                    <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">4. diff speed to be on the border at the same time </tspan>
+                </text>
+                <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "1"  path="M 0 0 L 110 -80">     </animateMotion>
+              </g>
+            </g>
+
+        </svg>
+        <span class="checkmateTooltip" style="display: none; visibility: visible; left: 111px; top: 304px;"></span>
+        <div id="osmMapCanvasId" class="map olMap" style="width: 553px; height: 608px;">
+            <div id="OpenLayers_Map_12_OpenLayers_ViewPort" class="olMapViewport olControlDragPanActive olControlZoomBoxActive olControlPinchZoomActive olControlNavigationActive" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
+                <div id="OpenLayers_Map_12_OpenLayers_Container" style="position: absolute; z-index: 749; left: 0px; top: 0px;">
+                    <div id="OpenLayers_Layer_OSM_2" dir="ltr" class="olLayerDiv olLayerGrid" style="position: absolute; width: 100%; height: 100%; z-index: 100; cursor: default;">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 267px; top: 214px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://a.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34800/52282.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 11px; top: 214px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://a.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34799/52282.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 267px; top: -42px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://d.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34800/52281.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 11px; top: -42px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://c.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34799/52281.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 267px; top: 470px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://c.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34800/52283.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 11px; top: 470px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://a.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34799/52283.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 523px; top: 214px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://b.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34801/52282.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: -245px; top: 214px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://d.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34798/52282.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 523px; top: -42px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://d.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34801/52281.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: -245px; top: -42px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://b.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34798/52281.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 523px; top: 470px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://d.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34801/52283.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: -245px; top: 470px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://a.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34798/52283.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 267px; top: 726px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://d.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34800/52284.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 11px; top: 726px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://c.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34799/52284.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: 523px; top: 726px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://b.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34801/52284.png" id="null">
+                        <img class="olTileImage" style="visibility: inherit; opacity: 1; position: absolute; left: -245px; top: 726px; width: 256px; height: 256px;" crossorigin="anonymous" src="http://d.tiles.mapbox.com/v3/geotab.map-tvkgmqok/17/34798/52284.png" id="null">
+                    </div>
+                    <div id="OpenLayers_Layer_OSM_4" dir="ltr" class="olLayerDiv olLayerGrid" style="position: absolute; width: 100%; height: 100%; z-index: 105; display: none;"></div>
+                    <div id="OpenLayers_Layer_OSM_6" dir="ltr" class="olLayerDiv olLayerGrid" style="position: absolute; width: 100%; height: 100%; z-index: 110; display: none;"></div>
+                    <div id="OpenLayers_Layer_OSM_8" dir="ltr" class="olLayerDiv olLayerGrid" style="position: absolute; width: 100%; height: 100%; z-index: 115; display: none;"></div>
+                    <div id="OpenLayers_Layer_OSM_10" dir="ltr" class="olLayerDiv olLayerGrid" style="position: absolute; width: 100%; height: 100%; z-index: 120; display: none;"></div>
+                </div>
+
+                <div id="OpenLayers_Control_ArgParser_16" class="olControlArgParser olControlNoSelect" unselectable="on" style="position: absolute; z-index: 1004;"></div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    </body>
+</html>

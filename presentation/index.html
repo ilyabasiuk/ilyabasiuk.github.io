@@ -98,13 +98,17 @@
 
         }
         document.addEventListener("impress:stepenter", function(e) {
-            var demo =  e.srcElement.querySelector(".active demo");
+            var demo =  e.srcElement && e.srcElement.querySelector(".active demo")||
+                        e.originalTarget.querySelector("demo");
+                        debugger;
+
             if (demo) {
               demo.style.display = "block"
             }
         });
         document.addEventListener("impress:stepleave", function(e) {
-            var demo = e.srcElement.querySelector("demo");
+            var demo = e.srcElement && e.srcElement.querySelector("demo") ||
+                        e.originalTarget.querySelector("demo");
             if (demo) {
               demo.style.display = "none"
             }

@@ -14,8 +14,15 @@ var perfomansceTestHelper = function (options) {
     add = function() {
         var label = templ.cloneNode(true);
         label.style.display = "";
-        options.canvas.appendChild(label);
-        label.appendChild(createRndAnimation());
+        //options.canvas.appendChild(label);
+        //debugger;
+        var anim = createRndAnimation();
+        for (var i=label.children.length; i--;) {
+          var child = label.children[i];
+          options.canvas.appendChild(child);
+          child.appendChild(anim.cloneNode(true));
+        }
+        //label.appendChild(createRndAnimation());
         count++;
         options.countDisplay.innerText = count;
     },
@@ -40,7 +47,7 @@ var perfomansceTestHelper = function (options) {
           startPosX = getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width) ,
           startPosY =  getRnd(-tmplBox.y, height - tmplBox.x + tmplBox.height);
 
-         return createMotionAnimation(startPosX, startPosY, getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width), getRnd(-tmplBox.y, height - tmplBox.x + tmplBox.height), getRnd(5,20));
+          return createMotionAnimation(startPosX, startPosY, getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width), getRnd(-tmplBox.y, height - tmplBox.x + tmplBox.height), getRnd(5,20));
     },
     createMotionAnimation = function(startPosX, startPosY, horizontalOffset, verticalOffset, duration) {
         var animation = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion')

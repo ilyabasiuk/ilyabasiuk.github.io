@@ -1,0 +1,50 @@
+<html>
+   <head>
+    <title> Performance testing </title>
+    <script src="js/helperInd.js"></script>
+    <script>
+        function init () {
+          var helper = perfomansceTestHelper({
+             canvas: document.querySelector("svg"),
+             addButton: document.getElementById("addBtn"),
+             clearButton: document.getElementById("clearBtn"),
+             countDisplay : document.getElementById("countLabels")
+          })
+        }
+
+         window.addEventListener('load', init, false )
+    </script>
+    <style>
+        /*svg  {
+          background-color : grey;
+        }*/
+.mapSvgElement .vehicleLabelRect {
+    fill: #fff;
+}
+.mapSvgElement .distanceLabelLine, .mapSvgElement .distanceLabelCircle {
+stroke-width: 1px;
+stroke: #fff;
+shape-rendering: optimizeSpeed;
+pointer-events: none;
+}
+    </style>
+   </head>
+
+   <body>
+  <input type ="button" id = "addBtn" value = "Add one (or just click on canvas)"/>
+  <input type ="button" id = "clearBtn" value = "Clear"/>
+  <div id = "countLabels" style = "display: inline; "> </div>
+<br>
+  <svg height="100%" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: absolute; z-index: 1000;">
+  <g>
+    <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M495 465L505 434L521 445Z" fill="#006c8e" stroke-width="1" stroke="#000000" class="mapSvgItem svgCheckmateVehicles" transform="matrix(1,0,0,1,0,0)"></path>
+    <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="-0.5" y="-0.5" width="52.60439988088234" height="2" r="0" rx="0" ry="0" fill="#006c8e" stroke="#000" class="mapSvgItem mapSvgRect distanceLabelLine" transform="matrix(0.678,-0.735,0.735,0.678,505,450)"></rect>
+    <circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="505" cy="451" r="3" fill="#006c8e" stroke="#000" class="mapSvgItem distanceLabelCircle" transform="matrix(1,0,0,1,0,0)"></circle>
+    <path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M541,392Q614.6953125,390,688.390625,392Q690.390625,402,688.390625,412Q614.6953125,414,541,412Q539,402,541,392" fill="none" stroke-width="1" stroke="#4db9db" class="mapSvgItem vehicleLabelRect"></path>
+    <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="543" y="402" text-anchor="start" text="Burlington pickup - Driving" font="" stroke="none" fill="#006c8e" class="mapSvgItem vehicleLabelText" font-size="12px" transform="rotate(0.01)">
+        <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Burlington pickup - Driving</tspan>
+    </text>
+</g>
+  </svg>
+   </body>
+<html>

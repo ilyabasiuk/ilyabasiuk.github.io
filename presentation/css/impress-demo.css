@@ -283,6 +283,10 @@ demo {
 .img {
   width : 100%;
 }
+
+.text {
+  font-size : 25px;
+}
 #title .footnote {
     font-size: 32px;
 }

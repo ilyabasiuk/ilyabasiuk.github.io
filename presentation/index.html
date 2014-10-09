@@ -242,28 +242,73 @@
        </demo>
     </div>
 
-    <div id="perf" class="step" data-x="-4500" data-y="600">
+    <div id="perf" class="step" data-x="-4500" data-y="1000">
           <p>Что же выбрать?</p><br/><br/>
     </div>
 
-    <div id="css-perf" class="step" data-x="-3000" data-y="600">
+    <div id="css-perf" class="step" data-x="-3000" data-y="1000">
         <p>Css-animation </p><br/>
-        <a href="perf/css.html" > 15 -30 fps </a>
-        <img class="img" src="img/2014-10-09_0447.png"/>
+        <a href="perf/css.html" > 10 -15 fps </a>
+        <img class="img" src="img/css_perf.png"/>
     </div>
 
-    <div id="raf-perf" class="step" data-x="-1500" data-y="600">
+    <div id="raf-perf" class="step" data-x="-1500" data-y="1000">
         <p>Raf-animation </p><br/>
-        <a href="perf/raf.html" > 10 - 25 fps </a>
-        <img class="img" src="img/2014-10-09_0530.png"/>
+        <a href="perf/raf.html" > 12 - 18 fps </a>
+        <img class="img" src="img/raf_perf.png"/>
     </div>
 
-    <div id="smil-perf" class="step" data-x="0" data-y="600">
+    <div id="smil-perf" class="step" data-x="0" data-y="1000">
         <p>SMIL-animation </p><br/>
-        <a href="perf/smil.html" > 20 - 35 fps </a>
-        <img class="img" src="img/2014-10-09_0539.png"/>
+        <a href="perf/smil.html" > 15 - 20 fps </a>
+        <img class="img" src="img/smil_perf.png"/>
     </div>
 
+
+    <div id="support" class="step" data-x="-4500" data-y="1500">
+          <p>Поддержка?</p><br/><br/>
+    </div>
+
+    <div id="css-support" class="step" data-x="-3000" data-y="2000">
+        <p>Css-animation </p><br/>
+
+        <img class="img" src="img/css_support.png"/>
+    </div>
+
+    <div id="raf-support" class="step" data-x="-1500" data-y="2000">
+        <p>Raf-animation </p><br/>
+
+        <img class="img" src="img/raf_support.png"/>
+    </div>
+
+    <div id="smil-support" class="step" data-x="0" data-y="2000">
+        <p>SMIL-animation </p><br/>
+
+        <img class="img" src="img/smil_support.png"/>
+    </div>
+<!---   ------------------------------------------------------------------------>
+
+<div id="p1-label1" class="step" data-x="1500" data-y="0">
+    <p>Moving label</p><br/>
+    <demo>
+      <iframe width="100%" height="300" src="http://jsfiddle.net/IlyaB/y6aryu5m/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    </demo>
+</div>
+
+<div id="p1-label2" class="step" data-x="1500" data-y="1000">
+    <p>  text-rendering<p>
+    <p class = "text">
+      The text-rendering CSS property provides information to the rendering engine about what to optimize for when rendering text. The browser makes trade-offs among speed, legibility, and geometric precision. The text-rendering property is an SVG property that is not defined in any CSS standard. However, Gecko and WebKit browsers let you apply this property to HTML and XML content on Windows, Mac OS X and Linux.
+    </p><br/>
+    <img class="img" src="img/text_rendering.png"/>
+</div>
+
+<div id="p1-label-text-rendering" class="step" data-x="1500" data-y="2000">
+    <p>text-rendering</p><br/>
+    <demo>
+      <iframe width="100%" height="300" src="http://jsfiddle.net/IlyaB/jjesh7az/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+    </demo>
+</div>
 <!--    <div id="title" class="step" data-x="0" data-y="0" data-scale="2">
         <span class="try">then you should try</span>
         <h1>impress.js<sup>*</sup></h1>
@@ -277,7 +322,7 @@
         Notation shouldn't be a surprise. We use `data-rotate="90"` attribute, meaning that this
         element should be rotated by 90 degrees clockwise.
 
-    -->
+
     <div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
         <p>It's a <strong>presentation tool</strong> <br/>
         inspired by the idea behind <a href="http://prezi.com">prezi.com</a> <br/>

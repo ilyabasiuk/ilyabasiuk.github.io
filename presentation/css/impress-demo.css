@@ -278,6 +278,10 @@ a:focus {
 }
 demo {
   display: none;
+  heigth: 500px;
+}
+.img {
+  width : 100%;
 }
 #title .footnote {
     font-size: 32px;

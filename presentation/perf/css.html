@@ -1,0 +1,50 @@
+<html>
+   <head>
+    <title> Performance testing </title>
+    <script src="js/helperCss.js"></script>
+    <script src="js/jQuery.js"></script>
+    <script src="js/jquery.keyframes.js"></script>
+<script src="js/prefixfree.min.js"></script>
+    <script>
+        function init () {
+          var helper = perfomansceTestHelper({
+             canvas: document.querySelector("svg"),
+             addButton: document.getElementById("addBtn"),
+             clearButton: document.getElementById("clearBtn"),
+             countDisplay : document.getElementById("countLabels")
+          })
+        }
+
+         window.addEventListener('load', init, false )
+    </script>
+    <style>
+        svg  {
+          background-color : grey;
+        }
+    </style>
+   </head>
+
+   <body>
+  <input type ="button" id = "addBtn" value = "Add one (or just click on canvas)"/>
+  <input type ="button" id = "clearBtn" value = "Clear"/>
+  <div id = "countLabels" style = "display: inline; "> </div>
+<br>
+  <svg height="100%" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: absolute; z-index: 1000;">
+    <g  style = "display: none;" >
+            <path id = "vehicle" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" d="M315,106L304,136L289,124Z" fill="#a01acc" stroke-width="1" stroke="#000000" class="mapSvgItem svgCheckmateVehicles">
+    </path>
+     <path id="svgLayerId38" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="-0.5" y="-0.5" width="53" height="2" r="0" rx="0" ry="0" fill="#a01acc" stroke="#000" class="mapSvgItem mapSvgRect distanceLabelLine" transform="matrix(0.6783,-0.7348,0.7348,0.6783,305,118)"></rect>
+    <circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="305" cy="119" r="3" fill="#a01acc" stroke="#000" class="mapSvgItem distanceLabelCircle"></circle>
+    <path id="svgLayerId39" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+
+     <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" x="341" y="60" width="120" height="20" r="0" rx="0" ry="0" fill="none" stroke-width="1" stroke="#ed67ff" class="mapSvgItem vehicleLabelRect"></rect>
+
+    <path id="svgLayerId40" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+    <text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-size: 12px;" x="343" y="70" text-anchor="start" text="HC's Car - Driving" font="" stroke="none" fill="#a01acc" class="mapSvgItem vehicleLabelText" font-size="12px" transform="rotate(0.01)">
+        <tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Any Car -  Driving</tspan>
+    </text>
+    </g>
+  </svg>
+   </body>
+<html>

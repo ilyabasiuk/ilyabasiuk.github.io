@@ -58,3 +58,33 @@ var perfomansceTestHelper = function (options) {
     };
 };
 ///  <animateMotion  end="indefinite" dur="10s" fill="freeze" repeatCount =  "indefinite" path="M 0 0 L 100 100">              </animateMotion>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var
+  myCircle = document.getElementById("myCircle"),
+  animateMotion = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
+
+  animateMotion.setAttribute("dur","8s");
+  animateMotion.setAttribute("d", "M 0 0 H 300 Z");
+  animateMotion.setAttribute("repeatCount","indefinite");
+  animateMotion.setAttribute("begin","indefinite");
+
+  myCircle.appendChild(animateMotion);
+  animateMotion.beginElement();

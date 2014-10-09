@@ -72,17 +72,25 @@ var  duration = 10 * 1000,
       var width = options.canvas.width.baseVal.value,
           height = options.canvas.height.baseVal.value,
           tmplBox = templ.getBBox();
-          getRnd = function(min, max)  {
-              return Math.floor((Math.random() * max) + min);
-          },
-          startPosX = getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width) ,
-          startPosY =  getRnd(-tmplBox.y, height - tmplBox.y + tmplBox.height);
+          curPos = {x: templ.querySelector("circle").getAttribute("cx"), y: templ.querySelector("circle").getAttribute("cy")}
+         getRnd = function(min, max)  {
+             return Math.random() * (max - min) + min;
+         },
+         getRndX = function() {
+           return  getRnd(0, width - 100) - curPos.x + 100;
+         },
+         getRndY =  function() {
+           return   getRnd(0, height - 100) - curPos.y + 100;
+         },
+         startPosX = getRndX() ,
+         startPosY =  getRndY();
 
-         return createMotionAnimation(startPosX, startPosY, getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width), getRnd(-tmplBox.y, height - tmplBox.y + tmplBox.height), getRnd(5,20));
+        return createMotionAnimation(startPosX, startPosY, getRndX(), getRndY(), getRnd(5,20));
     },
     i = 0,
     createMotionAnimation = function(startPosX, startPosY, horizontalOffset, verticalOffset, duration) {
       i++;
+      console.log(startPosX, startPosY, horizontalOffset, verticalOffset, duration);
       duration = duration  *1000;
       var animData= {
           startTime : Date.now(),

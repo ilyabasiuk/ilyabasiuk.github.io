@@ -18,6 +18,7 @@ var perfomansceTestHelper = function (options) {
         var vehId = "vehicle" + i;
         label.setAttribute("id", vehId);
         options.canvas.appendChild(label);
+
         $("#" + vehId).playKeyframe({
             name: animName, // name of the keyframe you want to bind to the selected element
             duration: getRnd(5,20) + 's', // [optional, default: 0, in ms] how long you want it to last in milliseconds
@@ -52,16 +53,24 @@ var perfomansceTestHelper = function (options) {
       var width = options.canvas.width.baseVal.value,
           height = options.canvas.height.baseVal.value,
           tmplBox = templ.getBBox();
+          curPos = {x: templ.querySelector("circle").getAttribute("cx"), y: templ.querySelector("circle").getAttribute("cy")}
           getRnd = function(min, max)  {
-              return Math.floor((Math.random() * max) + min);
+              return Math.random() * (max - min) + min;
           },
-          startPosX = getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width) ,
-          startPosY =  getRnd(-tmplBox.y, height - tmplBox.y + tmplBox.height);
+          getRndX = function() {
+            return  getRnd(0, width - 100) - curPos.x + 100;
+          },
+          getRndY =  function() {
+            return   getRnd(0, height - 100) - curPos.y + 100;
+          },
+          startPosX = getRndX() ,
+          startPosY =  getRndY();
 
-         return createMotionAnimation(startPosX, startPosY, getRnd(-tmplBox.x, width -tmplBox.x +tmplBox.width), getRnd(-tmplBox.y, height - tmplBox.y + tmplBox.height), getRnd(5,20));
+         return createMotionAnimation(startPosX, startPosY, getRndX(), getRndY(), getRnd(5,20));
     },
     i = 0,
     createMotionAnimation = function(startPosX, startPosY, horizontalOffset, verticalOffset, duration) {
+      console.log(startPosX, startPosY, horizontalOffset, verticalOffset, duration);
       i++;
       var name = 'anim'+i;
        var anim =   $.keyframe.define({
@@ -73,15 +82,7 @@ var perfomansceTestHelper = function (options) {
                   'transform': 'translate3d('+horizontalOffset+'px,' +verticalOffset +'px,0px)' //Note that 'transform' will be autoprefixed for you
               }
         });
-        var anim =   $.keyframe.define({
-               name: name,
-               from: {
-                   'transform': 'translate('+startPosX+'px,' +startPosY +'px)' //Note that 'transform' will be autoprefixed for you
-               },
-               to: {
-                   'transform': 'translate('+horizontalOffset+'px,' +verticalOffset +'px)' //Note that 'transform' will be autoprefixed for you
-               }
-         });
+
 
        return name;
     };

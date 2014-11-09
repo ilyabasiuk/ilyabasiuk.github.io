@@ -19,131 +19,118 @@
   <script src="https://rawgit.com/ilyabasiuk/streamDataAnalizer/master/streamDataAnalyzer.js"></script>
   <body>
 <video class = "stream" autoplay></video>
-<!-- <img   height="480" width="640" class = "stream" src=""> -->
 <canvas  height="480" width="640" class = "stream" ></canvas>
 <canvas class="demo" height="250" width="20" class = "stream" ></canvas>
 <canvas class="demoAnalized" height="250" width="20" class = "stream" ></canvas>
 <div class = "result"> </div>
 <script>
-
-  var analizer = streamDataAnalizer({
-      expiredTime: 1000,
-      defaultValue: 0
-  });
-  var video = document.querySelector('video');
-  var canvas = document.querySelector('canvas');
-  var ctx = canvas.getContext('2d');
-  var localMediaStream = null;
-  var resText = document.querySelector(".result");
-  var state = false;
-  var prevState = false;
-  var visualizer = function(canvas) {
-    var ctx = canvas.getContext("2d"),
-        maxHeight = canvas.height,
-        width = 30,
-        height;
+  var video = document.querySelector('video'),
+      canvas = document.querySelector('canvas'),
+      ctx = canvas.getContext('2d'),
+      localMediaStream = null,
+  //var resText = document.querySelector(".result");
+      analizer = streamDataAnalizer({
+          expiredTime: 1000,
+          defaultValue: 0
+        }),
+      visualizer = function(canvas) {
+        var ctx = canvas.getContext("2d"),
+            maxHeight = canvas.height,
+            width = 30,
+            height;
 
 
-    return {
-      set: function(value) {
-        var height = maxHeight/100 * value;
-        ctx.clearRect ( 0 , 0 , width , maxHeight );
-        ctx.fillStyle = "#FF0000";
-        ctx.fillRect(0,0,width, height);
-      }
-    }
-  };
+        return {
+          set: function(value) {
+            var height = maxHeight/100 * value;
+            ctx.clearRect ( 0 , 0 , width , maxHeight );
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(0,0,width, height);
+          }
+        }
+      },
+      viz = visualizer(document.querySelector(".demo")), //will show current value
+      vizAn = visualizer(document.querySelector(".demoAnalized")), // will show analized value
+      alerter = function(el, limit) {
+        var prevState = false,
+            changeState = function(state) {
+                prevState = state;
+                if (state) {
+                  el.innerText = "ALARM";
+                  el.classList.add("alarm");
+                } else {
+                  el.innerText = "Silent";
+                  el.classList.remove("alarm");
+                }
+            };
 
-  var viz = visualizer(document.querySelector(".demo")),
-  vizAn = visualizer(document.querySelector(".demoAnalized")),
-  alerter = function(el) {
-    var prevState = false,
-        changeState = function(state) {
-            prevState = state;
-            if (state) {
-              el.innerText = "ALARM";
-              el.classList.add("alarm");
-            } else {
-              el.innerText = "Silent";
-              el.classList.remove("alarm");
-            }
-        };
-
-    return {
-        put : function(value) {
-            var isMoving = (value>1.5);
-            if (isMoving !== prevState) {
-              changeState(isMoving);
+        return {
+            put : function(value) {
+                var isMoving = (value> limit);
+                if (isMoving !== prevState) {
+                  changeState(isMoving);
+                }
             }
         }
-    }
-  }(document.querySelector(".result"));
+      }(document.querySelector(".result"), 1.5), // if more than 1.5 % of screen changed will conseder that moving detected
+      prevImage,
+      processImage  = function () {
+          if (localMediaStream) {
+            var width = canvas.width,
+                height = canvas.height;
 
-  navigator.getUserMedia  = navigator.getUserMedia ||
-                          navigator.webkitGetUserMedia ||
-                          navigator.mozGetUserMedia ||
-                          navigator.msGetUserMedia;
-  var prevImage;
-  function snapshot() {
-    if (localMediaStream) {
-      var width = canvas.width,
-          height = canvas.height;
+            ctx.drawImage(video, 0, 0);
+            var image = ctx.getImageData(0,0,canvas.width,canvas.height);
+            var resImage =  ctx.createImageData(width,height);
 
-      ctx.drawImage(video, 0, 0);
-      var image = ctx.getImageData(0,0,canvas.width,canvas.height);
-      var resImage =  ctx.createImageData(width,height);
+            if (prevImage) {
+                var isFarFrom = function(a,b) {
+                   return Math.abs(a-b) > 20;
+                };
+                var countPix = image.data.length/4,
+                    countChangedPix = 0;
 
-      if (prevImage) {
-          var isFarFrom = function(a,b) {
-             return Math.abs(a-b) > 20;
-          };
-          var countPix = image.data.length/4,
-              countChangedPix = 0;
+                for (var i=0;i<image.data.length;i+=4){
+                  var red = i, green = 1+i, blue = 2+i, alpha = 3+i;
+                    if (isFarFrom(image.data[red],prevImage.data[red])
+                        || isFarFrom(image.data[green],prevImage.data[green])
+                        || isFarFrom(image.data[blue], prevImage.data[blue])
+                        || isFarFrom(image.data[alpha], prevImage.data[alpha])) {
+                    resImage.data[alpha] = 255;
+                    countChangedPix++;
+                    } else {
 
-          for (var i=0;i<image.data.length;i+=4){
-            var red = i, green = 1+i, blue = 2+i, alpha = 3+i;
-              if (isFarFrom(image.data[red],prevImage.data[red])
-                  || isFarFrom(image.data[green],prevImage.data[green])
-                  || isFarFrom(image.data[blue], prevImage.data[blue])
-                  || isFarFrom(image.data[alpha], prevImage.data[alpha])) {
-              resImage.data[alpha] = 255;
-              countChangedPix++;
-              } else {
-
-                resImage.data[red] = 255;
-                resImage.data[green] = 255;
-                resImage.data[blue] = 255;
-                resImage.data[alpha] = 255;
-              }
+                      resImage.data[red] = 255;
+                      resImage.data[green] = 255;
+                      resImage.data[blue] = 255;
+                      resImage.data[alpha] = 255;
+                    }
+                }
+                var percent = countChangedPix/countPix * 100;
+                analizer.add(percent)
+                viz.set(percent);
+                var filteredValue = analizer.get();
+                vizAn.set(filteredValue);
+                alerter.put(filteredValue);
+                ctx.putImageData(resImage,0,0);
+            }
+            prevImage = image;
           }
-          var percent = countChangedPix/countPix * 100;
-          analizer.add(percent)
-          viz.set(percent);
-          var filteredValue = analizer.get();
-          vizAn.set(filteredValue);
-          alerter.put(filteredValue);
-          ctx.putImageData(resImage,0,0);
-      }
-      prevImage = image;
-      // "image/webp" works in Chrome.
-      // Other browsers will fall back to image/png.
-      //document.querySelector('img').src = canvas.toDataURL('image/webp');
+      },
+      errorCallback = function() {
+        alert("Problem while getting user video. Yous shoul allow use your camera.")
+      },
+      step = function() {
+        processImage();
+        requestAnimationFrame(step);
+      };
 
-    }
-  }
-
-  //video.addEventListener('click', snapshot, false);
-  var errorCallback = function() {
-    alert("is not supported")
-  };
-
-  var step = function() {
-    snapshot();
-    requestAnimationFrame(step);
-  }
+      navigator.getUserMedia = navigator.getUserMedia ||
+                                navigator.webkitGetUserMedia ||
+                                navigator.mozGetUserMedia ||
+                                navigator.msGetUserMedia;
 
   if (navigator.getUserMedia) {
-      // Not showing vendor prefixes or code that works cross-browser.
       navigator.getUserMedia({video: true}, function(stream) {
         video.src = window.URL.createObjectURL(stream);
         localMediaStream = stream;

@@ -210,14 +210,17 @@ var streamDataAnalizer = function(settings) {
     requestAnimationFrame(step);
   }
 
-alert(navigator.getUserMedia);
-  // Not showing vendor prefixes or code that works cross-browser.
-  navigator.getUserMedia({video: true}, function(stream) {
-    alert("start");
-    video.src = window.URL.createObjectURL(stream);
-    localMediaStream = stream;
-    step();
-  }, errorCallback);
+  if (navigator.getUserMedia) {
+      // Not showing vendor prefixes or code that works cross-browser.
+      navigator.getUserMedia({video: true}, function(stream) {
+        video.src = window.URL.createObjectURL(stream);
+        localMediaStream = stream;
+        step();
+      }, errorCallback);
+  } else {
+     alert("Sorry, but your browser doesn't support getUserMedia function");
+  }
+
 </script>
   </body>
 </html>

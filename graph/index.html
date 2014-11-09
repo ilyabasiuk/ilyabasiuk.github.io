@@ -69,7 +69,7 @@
           }).forEach(function (key) {
               var delayTime = logs[key];
               countLogs++;
-              analyzer.add(timestamp, delayTime);
+              analyzer.add(delayTime,timestamp);
           });
           var temp = new Date(timestamp);
 

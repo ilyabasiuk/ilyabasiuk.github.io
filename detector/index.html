@@ -16,7 +16,7 @@
        }
     </style>
   </head>
-
+  <script src="https://rawgit.com/ilyabasiuk/streamDataAnalizer/master/streamDataAnalyzer.js"></script>
   <body>
 <video class = "stream" autoplay></video>
 <!-- <img   height="480" width="640" class = "stream" src=""> -->
@@ -25,79 +25,11 @@
 <canvas class="demoAnalized" height="250" width="20" class = "stream" ></canvas>
 <div class = "result"> </div>
 <script>
-var streamDataAnalizer = function(settings) {
-      var cache = {},
-          defaultOptions = {
-              expiredTime : 1000,
-              delayTime : 0
-          },
-          isKeyTooOld = function(timestamp, key) {
-              var deltaTime = timestamp - key;
-              return deltaTime >  defaultOptions.expiredTime;
-          },
-          getActualData = function(timestamp) {
-              var isActual =  function(key) {
-                    return timestamp -key <=defaultOptions.expiredTime;
-              }, data;
-              data =  Object.keys(cache).filter(function(key) {
-                    if (isKeyTooOld(timestamp, key)) {
-                        delete cache[key];
-                        return false;
-                    } else {
-                         return true;
-                    }})
-                  .filter(isActual)
-                  .reduce(function(actualData, currentKey) {
-                     return  actualData.concat(cache[currentKey]);
-                  },[]);
 
-               return data;
-          },
-          getAvgValue = function(data) {
-              var avg = data.reduce(function(prevVal, curVal){
-                return prevVal + curVal;
-              },0)/data.length;
-
-              return avg;
-          },
-          getValue =  function(timestamp) {
-              var data = getActualData(timestamp);
-              if (data.length < 3) {
-                 return defaultOptions.delayTime;
-              } else {
-                  return getAvgValue(data)
-              };
-          };
-      return {
-          add: function(timestamp, value) {
-             !cache[timestamp] && (cache[timestamp] = []);
-             cache[timestamp].push(value);
-          },
-          get: function(timestamp) {
-              !timestamp && (timestamp = Date.now());
-              return getValue(timestamp);
-          },
-          getMed: function(timestamp) {
-              !timestamp && (timestamp = Date.now());
-              var data = getActualData(timestamp),
-                  avgVal =  getAvgValue(data);
-
-                  data = data.filter(function(value) {
-                      return  2* avgVal > value;
-                  });
-
-              if (data.length < 10) {
-                 return defaultOptions.delayTime;
-              } else {
-                data.sort(function(a,b) {return a-b});
-                return data[(data.length >> 1) +1] * 1.5;
-              }
-          }
-      }
-};
   var analizer = streamDataAnalizer({
-
-  })
+      expiredTime: 1000,
+      defaultValue: 0
+  });
   var video = document.querySelector('video');
   var canvas = document.querySelector('canvas');
   var ctx = canvas.getContext('2d');
@@ -185,7 +117,7 @@ var streamDataAnalizer = function(settings) {
               }
           }
           var percent = countChangedPix/countPix * 100;
-          analizer.add(Date.now(), percent)
+          analizer.add(percent)
           viz.set(percent);
           var filteredValue = analizer.get();
           vizAn.set(filteredValue);

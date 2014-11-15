@@ -21,7 +21,7 @@
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <script>
-        function init () {
+      /*  function init () {
 
         }
         document.addEventListener("impress:stepenter", function(e) {
@@ -48,7 +48,8 @@
         //      demo.style.display = "none";
         //    }
         // })
-         window.addEventListener('load', init, false )
+        window.addEventListener('load', init, false )
+        */
     </script>
 </head>
 
@@ -140,7 +141,123 @@
       &lt;svg&gt;
       </code></pre>
       <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/Jojvee/'>external svg file</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    </div>
   </div>
+
+  <div id="data_image_svg_xml" class="step" data-x="2000" data-y="1500">
+        <p>href = "data:image/svg+xml, ..." </p>
+
+                <div data-height="587" data-theme-id="0" data-slug-hash="zxYjya" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+             style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+             version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+             xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+             &lt;g class=&quot;group&quot;&gt;
+                &lt;image
+                     xlink:href=&quot;data:image/svg+xml;utf8,&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;
+        &lt;!DOCTYPE svg PUBLIC &#39;-//W3C//DTD SVG 1.1//EN&#39; &#39;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&#39;&gt;
+        &lt;svg version=&#39;1.1&#39; id=&#39;Layer_1&#39; xmlns=&#39;http://www.w3.org/2000/svg&#39; xmlns:xlink=&#39;http://www.w3.org/1999/xlink&#39; x=&#39;0px&#39; y=&#39;0px&#39;
+        	 width=&#39;129px&#39; height=&#39;20px&#39; viewBox=&#39;0 0 129 20&#39; enable-background=&#39;new 0 65.326 612 502.174&#39;
+        	 xml:space=&#39;preserve&#39;&gt;
+                 &lt;rect  x=&#39;0&#39; y=&#39;0&#39; width=&#39;129&#39; height=&#39;20&#39; r=&#39;0&#39; rx=&#39;0&#39; ry=&#39;0&#39; fill=&#39;#fff&#39; stroke=&#39;#1300bd&#39; class=&#39;vehicleLabelRect&#39;&gt;&lt;/rect&gt;
+
+                &lt;text  x=&#39;2&#39; y=&#39;7&#39;
+                    text-anchor=&#39;start&#39;
+                    fill=&#39;#1300bd&#39;
+                    class=&#39;vehicleLabelText&#39;
+                    font-size=&#39;12px&#39;&gt;
+
+                    &lt;tspan dy=&#39;5&#39;&gt; TestTestTestTestTestTest&lt;/tspan&gt;
+                &lt;/text&gt;
+        &lt;/svg&gt;
+        &quot;
+
+                     x=&quot;0&quot; y=&quot;0&quot;
+                     height=&quot;20px&quot;
+                     width=&quot;130px&quot;/&gt;
+
+                &lt;animateMotion
+                    end=&quot;indefinite&quot;
+                    dur=&quot;40s&quot;
+                    repeatCount=&quot;indefinite&quot;
+                    fill=&quot;freeze&quot;
+                    path=&quot;M 0 0 L 200 200&quot;&gt;
+                &lt;/animateMotion&gt;
+            &lt;/g&gt;
+        &lt;svg&gt;
+        </code></pre>
+        <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/zxYjya/'>data:image/svg+xml;utf8,</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+        </div>
+
+  </div>
+
+
+<div id="base64" class="step" data-x="2000" data-y="3000">
+      <p>base64 ? </p>
+
+    <div data-height="575" data-theme-id="0" data-slug-hash="MYWGxO" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+       style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+       version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+       xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+       &lt;g class=&quot;group&quot;&gt;
+          &lt;image
+               xlink:href=&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxMjlweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMTI5IDIwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgNjUuMzI2IDYxMiA1MDIuMTc0IiB4bWw6c3BhY2U9InByZXNlcnZlIj4gICAgICAgICA8cmVjdCAgeD0iMCIgeT0iMCIgd2lkdGg9IjEyOSIgaGVpZ2h0PSIyMCIgcj0iMCIgcng9IjAiIHJ5PSIwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiMxMzAwYmQiIGNsYXNzPSJ2ZWhpY2xlTGFiZWxSZWN0Ij48L3JlY3Q+ICAgICAgICA8dGV4dCAgeD0iMiIgeT0iNyIgICAgICAgICAgICB0ZXh0LWFuY2hvcj0ic3RhcnQiICAgICAgICAgICAgZmlsbD0iIzEzMDBiZCIgICAgICAgICAgICBjbGFzcz0idmVoaWNsZUxhYmVsVGV4dCIgICAgICAgICAgICBmb250LXNpemU9IjEycHgiPiAgICAgICAgICAgIDx0c3BhbiBkeT0iNSI+IFRlc3RUZXN0VGVzdFRlc3RUZXN0VGVzdDwvdHNwYW4+ICAgICAgICA8L3RleHQ+PC9zdmc+&quot;
+  &quot;
+
+               x=&quot;0&quot; y=&quot;0&quot;
+               height=&quot;20px&quot;
+               width=&quot;130px&quot;/&gt;
+
+          &lt;animateMotion
+              end=&quot;indefinite&quot;
+              dur=&quot;40s&quot;
+              repeatCount=&quot;indefinite&quot;
+              fill=&quot;freeze&quot;
+              path=&quot;M 0 0 L 200 200&quot;&gt;
+          &lt;/animateMotion&gt;
+      &lt;/g&gt;
+  &lt;svg&gt;
+  </code></pre>
+  <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/MYWGxO/'>base64</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  </div><script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+
+</div>
+
+<div id="png" class="step" data-x="2000" data-y="3000">
+      <p>png ? </p>
+
+    <div data-height="575" data-theme-id="0" data-slug-hash="MYWGxO" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+       style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+       version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+       xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+       &lt;g class=&quot;group&quot;&gt;
+          &lt;image
+               xlink:href=&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIxMjlweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMTI5IDIwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgNjUuMzI2IDYxMiA1MDIuMTc0IiB4bWw6c3BhY2U9InByZXNlcnZlIj4gICAgICAgICA8cmVjdCAgeD0iMCIgeT0iMCIgd2lkdGg9IjEyOSIgaGVpZ2h0PSIyMCIgcj0iMCIgcng9IjAiIHJ5PSIwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiMxMzAwYmQiIGNsYXNzPSJ2ZWhpY2xlTGFiZWxSZWN0Ij48L3JlY3Q+ICAgICAgICA8dGV4dCAgeD0iMiIgeT0iNyIgICAgICAgICAgICB0ZXh0LWFuY2hvcj0ic3RhcnQiICAgICAgICAgICAgZmlsbD0iIzEzMDBiZCIgICAgICAgICAgICBjbGFzcz0idmVoaWNsZUxhYmVsVGV4dCIgICAgICAgICAgICBmb250LXNpemU9IjEycHgiPiAgICAgICAgICAgIDx0c3BhbiBkeT0iNSI+IFRlc3RUZXN0VGVzdFRlc3RUZXN0VGVzdDwvdHNwYW4+ICAgICAgICA8L3RleHQ+PC9zdmc+&quot;
+  &quot;
+
+               x=&quot;0&quot; y=&quot;0&quot;
+               height=&quot;20px&quot;
+               width=&quot;130px&quot;/&gt;
+
+          &lt;animateMotion
+              end=&quot;indefinite&quot;
+              dur=&quot;40s&quot;
+              repeatCount=&quot;indefinite&quot;
+              fill=&quot;freeze&quot;
+              path=&quot;M 0 0 L 200 200&quot;&gt;
+          &lt;/animateMotion&gt;
+      &lt;/g&gt;
+  &lt;svg&gt;
+  </code></pre>
+  <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/MYWGxO/'>base64</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  </div><script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+
+</div>
+
 
   <!--  <div id="css" class="step" data-x="-3000" data-y="0">
         <p>CSS - Анимация</p><br/><br/>

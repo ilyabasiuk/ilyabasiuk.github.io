@@ -38,16 +38,16 @@
               demo.style.display = "none"
             }
         });
-        document.addEventListener("keyup", function(e) {
-           if (e.keyCode == 83) {
-             var demo = document.querySelector(".active demo");
-             demo.style.display = "block";
-           }
-           if (e.keyCode == 72) {
-             var demo = document.querySelector(".active demo");
-             demo.style.display = "none";
-           }
-        })
+        // document.addEventListener("keyup", function(e) {
+        //    if (e.keyCode == 83) {
+        //      var demo = document.querySelector(".active demo");
+        //      demo.style.display = "block";
+        //    }
+        //    if (e.keyCode == 72) {
+        //      var demo = document.querySelector(".active demo");
+        //      demo.style.display = "none";
+        //    }
+        // })
          window.addEventListener('load', init, false )
     </script>
 </head>
@@ -64,20 +64,20 @@
 </div>
 
 
-    <div id="first" class="step" data-x="-1500" data-y="-1500">
+  <!--  <div id="first" class="step" data-x="-1500" data-y="-1500">
         <h1>Анимация</h1><br/><br/>
         <p>или почему машина не едет?</p>
     </div>
-
+-->
     <div id="begin" class="step" data-x="0" data-y="-1500">
         <p> Начало </p>
-        <demo >
-      <p data-height="476" data-theme-id="0" data-slug-hash="egdFI" data-default-tab="result" data-user="ilyabasiuk" class='codepen'>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/egdFI/'>ff  rotated without text path raf</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-<script async src="//codepen.io/assets/embed/ei.js"></script>
-        </demo>
+        <div >
+            <p data-height="600" data-theme-id="0" data-slug-hash="yyLjXg" data-default-tab="result" data-user="ilyabasiuk" class='codepen'>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/yyLjXg/'>svg basic example</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+            <script async src="//codepen.io/assets/embed/ei.js"></script>
+        </div>
     </div>
 
-    <div id="css" class="step" data-x="-3000" data-y="0">
+  <!--  <div id="css" class="step" data-x="-3000" data-y="0">
         <p>CSS - Анимация</p><br/><br/>
         <img src="img/2014-10-09_0117.png"/>
     </div>
@@ -121,7 +121,7 @@
 
 <!--  -->
 
-    <div id="raf" class="step" data-x="-1500" data-y="0">
+<!--    <div id="raf" class="step" data-x="-1500" data-y="0">
         <p>requestAnimationFrame</p><br/><br/>
         <img src="img/2014-10-09_0126.png"/>
     </div>
@@ -188,7 +188,7 @@
 
 </div>
 
-
+-->
 <div class="hint">
     <p>Use a spacebar or arrow keys to navigate</p>
 </div>

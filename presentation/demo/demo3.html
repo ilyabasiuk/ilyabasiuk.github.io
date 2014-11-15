@@ -78,7 +78,215 @@
 
   <div id="hairs" class="step" data-x="0" data-y="0">
         <p> Но.. Ведь.. Как же так..</p>
-        <img src="img/hairs.jpg"
+        <img src="img/hairs.jpg"/>
+  </div>
+
+  <div id="issue" class="step" data-x="2000" data-y="0">
+        <p></p>
+        <img src="img/issue.png"/>
+  </div>
+
+
+  <div id="text_rendering" class="step" data-x="0" data-y="1500">
+        <p> text-Rendering</p>
+        <img src="img/2014-11-16_0128.png"/>
+  </div>
+
+  <div id="text_rendering_sample" class="step" data-x="0" data-y="3000">
+        <p> text-Rendering</p>
+                    <div data-height="574" data-theme-id="0" data-slug-hash="LEYBJz" data-default-tab="css" data-user="ilyabasiuk" class='codepen'><pre><code>.group{
+              text-rendering: optimizeSpeed
+            }
+            .group1{
+              text-rendering: optimizeLegibility
+            }
+            .group2{
+              text-rendering: geometricPrecision
+            }
+            </code></pre>
+            <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/LEYBJz/'>canary text-rendering</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+            </div>
+  </div>
+
+  <div id="translate3d" class="step" data-x="0" data-y="4500">
+        <p> translate3d</p>
+                    <div data-height="599" data-theme-id="0" data-slug-hash="yyLqRN" data-default-tab="css" data-user="ilyabasiuk" class='codepen'><pre><code>.group{
+              text-rendering: optimizeSpeed
+            }
+            .group1 {
+                 -webkit-transform: translate3d(0, 0, 0);
+                 -webkit-backface-visibility: hidden;
+                 -webkit-perspective: 1000;
+            }
+            </code></pre>
+            <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/yyLqRN/'>canary translate3d</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+            </div>
+  </div>
+
+  <div id="font-smoothing" class="step" data-x="0" data-y="6000">
+        <p>   -webkit-font-smoothing</p>
+                <div data-height="595" data-theme-id="0" data-slug-hash="OPJwBr" data-default-tab="css" data-user="ilyabasiuk" class='codepen'><pre><code>.group{
+          text-rendering: optimizeSpeed;
+          -webkit-font-smoothing: none;
+        }
+        .group1{
+          text-rendering: optimizeSpeed;
+          -webkit-font-smoothing: antialiased;
+        }
+        .group2{
+          text-rendering: optimizeSpeed;
+          -webkit-font-smoothing: subpixel-antialiased;
+        }
+        </code></pre>
+        <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/OPJwBr/'>canary antialiasing</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+        </div>
+  </div>
+
+  <div id="stroke" class="step" data-x="0" data-y="7500">
+        <p>stroke</p>
+        <div data-height="585" data-theme-id="0" data-slug-hash="ogNMQo" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+             style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+             version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+             xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+             &lt;g class=&quot;group&quot; transform=&quot;rotate(0.01)&quot;&gt;
+                &lt;path
+                   d=&quot;M 0 0 q 65 -2 140 0 q 2 10 0 20 q -65 2 -140 0 q -2 -10 0 -20&quot; stroke=&quot;#B8B2EB&quot;
+                   stroke-width=&quot;1&quot;
+                   fill=&quot;#fff&quot; /&gt;
+
+                &lt;text  x=&quot;2&quot; y=&quot;7&quot;
+                    text-anchor=&quot;start&quot;
+                    fill=&quot;#1300bd&quot;
+                    class=&quot;vehicleLabelText&quot;
+                    font-weight = &quot;bold&quot;
+                    font-size=&quot;12px&quot;&gt;
+                        &lt;tspan dy=&quot;5&quot;&gt; TestTestTestTestTestTest&lt;/tspan&gt;
+                &lt;/text&gt;
+
+                &lt;animateMotion
+                    end=&quot;indefinite&quot;
+                    dur=&quot;40s&quot;
+                    repeatCount=&quot;indefinite&quot;
+                    fill=&quot;freeze&quot;
+                    path=&quot;M 0 0 L 200 200&quot;&gt;
+                &lt;/animateMotion&gt;
+            &lt;/g&gt;
+          &lt;g class=&quot;group1&quot; transform=&quot;rotate(0.01)&quot;&gt;
+                &lt;path
+                   d=&quot;M 0 0 q 65 -2 140 0 q 2 10 0 20 q -65 2 -140 0 q -2 -10 0 -20&quot; stroke=&quot;#B8B2EB&quot;
+                   stroke-width=&quot;1&quot;
+                   fill=&quot;#fff&quot; /&gt;
+
+                &lt;text  x=&quot;2&quot; y=&quot;7&quot;
+                    text-anchor=&quot;start&quot;
+                    fill=&quot;#1300bd&quot;
+                    stroke=&quot;#B8B2EB&quot;
+                    class=&quot;vehicleLabelText&quot;
+                    font-weight = &quot;bold&quot;
+                    font-size=&quot;12px&quot;&gt;
+                        &lt;tspan dy=&quot;5&quot;&gt; TestTestTestTestTestTest&lt;/tspan&gt;
+                &lt;/text&gt;
+
+                &lt;animateMotion
+                    end=&quot;indefinite&quot;
+                    dur=&quot;40s&quot;
+                    repeatCount=&quot;indefinite&quot;
+                    fill=&quot;freeze&quot;
+                    path=&quot;M 0 50 L 200 250&quot;&gt;
+                &lt;/animateMotion&gt;
+            &lt;/g&gt;
+          &lt;g class=&quot;group2&quot; transform=&quot;rotate(0.01)&quot;&gt;
+                &lt;path
+                   d=&quot;M 0 0 q 65 -2 140 0 q 2 10 0 20 q -65 2 -140 0 q -2 -10 0 -20&quot; stroke=&quot;#B8B2EB&quot;
+                   stroke-width=&quot;1&quot;
+                   fill=&quot;#fff&quot; /&gt;
+
+                &lt;text  x=&quot;2&quot; y=&quot;7&quot;
+                    text-anchor=&quot;start&quot;
+                    fill=&quot;#1300bd&quot;
+                    stroke=&quot;#1300bd&quot;
+                    class=&quot;vehicleLabelText&quot;
+                    font-weight = &quot;bold&quot;
+                    font-size=&quot;12px&quot;&gt;
+                        &lt;tspan dy=&quot;5&quot;&gt; TestTestTestTestTestTest&lt;/tspan&gt;
+                &lt;/text&gt;
+
+                &lt;animateMotion
+                    end=&quot;indefinite&quot;
+                    dur=&quot;40s&quot;
+                    repeatCount=&quot;indefinite&quot;
+                    fill=&quot;freeze&quot;
+                    path=&quot;M 0 100 L 200 300&quot;&gt;
+                &lt;/animateMotion&gt;
+            &lt;/g&gt;
+
+        &lt;svg&gt;
+        </code></pre>
+        <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/ogNMQo/'>stroke</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+        </div>
+  </div>
+
+
+  <div id="font-family" class="step" data-x="0" data-y="9000">
+        <p> font-family</p>
+                    <div data-height="576" data-theme-id="0" data-slug-hash="MYWBZa" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+             style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+             version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+             xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+             &lt;g class=&quot;group&quot; transform=&quot;rotate(0.01)&quot;&gt;
+                &lt;path
+                   d=&quot;M 0 0 q 65 -2 140 0 q 2 10 0 20 q -65 2 -140 0 q -2 -10 0 -20&quot; stroke=&quot;#B8B2EB&quot;
+                   stroke-width=&quot;1&quot;
+                   fill=&quot;#fff&quot; /&gt;
+
+                &lt;text  x=&quot;2&quot; y=&quot;7&quot;
+                    text-anchor=&quot;start&quot;
+                    fill=&quot;#1300bd&quot;
+                    class=&quot;vehicleLabelText&quot;
+                    font-weight = &quot;bold&quot;
+                    font-size=&quot;12px&quot;&gt;
+                        &lt;tspan dy=&quot;5&quot;&gt; TestTestTestTestTestTest&lt;/tspan&gt;
+                &lt;/text&gt;
+
+                &lt;animateMotion
+                    end=&quot;indefinite&quot;
+                    dur=&quot;40s&quot;
+                    repeatCount=&quot;indefinite&quot;
+                    fill=&quot;freeze&quot;
+                    path=&quot;M 0 0 L 200 200&quot;&gt;
+                &lt;/animateMotion&gt;
+            &lt;/g&gt;
+          &lt;g class=&quot;group1&quot; transform=&quot;rotate(0.01)&quot;&gt;
+                &lt;path
+                   d=&quot;M 0 0 q 65 -2 140 0 q 2 10 0 20 q -65 2 -140 0 q -2 -10 0 -20&quot; stroke=&quot;#B8B2EB&quot;
+                   stroke-width=&quot;1&quot;
+                   fill=&quot;#fff&quot; /&gt;
+
+                &lt;text  x=&quot;2&quot; y=&quot;7&quot;
+                    text-anchor=&quot;start&quot;
+                    fill=&quot;#1300bd&quot;
+                    class=&quot;vehicleLabelText&quot;
+                    font-weight = &quot;bold&quot;
+                    font-family = &quot;Comic Sans MS&quot;
+                    font-size=&quot;12px&quot;&gt;
+                        &lt;tspan dy=&quot;5&quot;&gt; TestTestTestTestTest&lt;/tspan&gt;
+                &lt;/text&gt;
+
+                &lt;animateMotion
+                    end=&quot;indefinite&quot;
+                    dur=&quot;40s&quot;
+                    repeatCount=&quot;indefinite&quot;
+                    fill=&quot;freeze&quot;
+                    path=&quot;M 0 50 L 200 250&quot;&gt;
+                &lt;/animateMotion&gt;
+            &lt;/g&gt;
+
+        &lt;svg&gt;
+        </code></pre>
+        <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/MYWBZa/'>font-family</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+        </div>
   </div>
 
 </div>

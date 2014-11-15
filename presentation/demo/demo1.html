@@ -252,6 +252,137 @@
 
 </div>
 
+<div id="foreignObject" class="step" data-x="2000" data-y="6000">
+      <p>foreignObject ? </p>
+            <div data-height="600" data-theme-id="0" data-slug-hash="mydLYy" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+           style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+           version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+           xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+           &lt;g class=&quot;group&quot;&gt;
+              &lt;foreignobject x=&quot;0&quot; y=&quot;0&quot; width=&quot;150&quot; height=&quot;26&quot;&gt;
+                 &lt;div style=&quot;font-size: 12px; color:#1300bd; border: 2px solid #1300bd; padding:2px; background-color:#fff&quot;
+                      xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+                      class=&quot;htmlLabel&quot;&gt;
+                   TestTestTestTestTestTest
+                &lt;/div&gt;
+              &lt;/foreignobject&gt;
+
+              &lt;animateMotion
+                  end=&quot;indefinite&quot;
+                  dur=&quot;20s&quot;
+                  repeatCount=&quot;indefinite&quot;
+                  fill=&quot;freeze&quot;
+                  path=&quot;M 0 0 L 200 200&quot;&gt;
+              &lt;/animateMotion&gt;
+          &lt;/g&gt;
+      &lt;svg&gt;
+      </code></pre>
+      <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/mydLYy/'>foreingObject</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+      </div>
+
+</div>
+
+<div id="animateTransform" class="step" data-x="4000" data-y="-1500">
+      <p>animateTransform instead animateMotion </p>
+          <div data-height="600" data-theme-id="0" data-slug-hash="PwoerZ" data-default-tab="html" data-user="ilyabasiuk" class='codepen'><pre><code>&lt;svg width=&quot;1200px&quot; height=&quot;600px&quot; viewBox=&quot;0 0 1200 600&quot;
+         style =&quot;background-image:url(&#39;http://ilyabasiuk.github.io/images/map_example.png&#39;)&quot;;
+         version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;
+         xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+
+         &lt;g class=&quot;group&quot;&gt;
+            &lt;rect  x=&quot;0&quot; y=&quot;0&quot; width=&quot;129&quot; height=&quot;20&quot; r=&quot;0&quot; rx=&quot;0&quot; ry=&quot;0&quot; fill=&quot;#fff&quot; stroke=&quot;#1300bd&quot; class=&quot;vehicleLabelRect&quot;&gt;&lt;/rect&gt;
+
+            &lt;text  x=&quot;2&quot; y=&quot;7&quot;
+                text-anchor=&quot;start&quot;
+                fill=&quot;#1300bd&quot;
+                class=&quot;vehicleLabelText&quot;
+                font-size=&quot;12px&quot;&gt;
+
+                &lt;tspan dy=&quot;5&quot;&gt; TestTestTestTestTestTest&lt;/tspan&gt;
+            &lt;/text&gt;
+
+             &lt;animatetransform
+                 attributename=&quot;transform&quot;
+                 dur=&quot;40s&quot;
+                 type=&quot;translate&quot;
+                 to=&quot;200 200&quot;
+                 repeatcount=&quot;indefinite&quot;&gt;
+              &lt;/animatetransform&gt;
+        &lt;/g&gt;
+      &lt;svg&gt;
+      </code></pre>
+      <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/PwoerZ/'>animate Transform</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+      </div>
+
+</div>
+
+
+<div id="css_animation_example" class="step" data-x="4000" data-y="0">
+      <p>Css animation </p>
+        <div data-height="600" data-theme-id="0" data-slug-hash="raNvEK" data-default-tab="css" data-user="ilyabasiuk" class='codepen'><pre><code>.group {
+          -webkit-animation: myfirst 40s; /* Chrome, Safari, Opera */
+          animation: myfirst 40s infinite;
+          -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+          animation-timing-function: linear;
+          -webkit-animation-iteration-count: infinite; /* Chrome, Safari, Opera */
+          animation-iteration-count: infinite;
+        }
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes myfirst {
+          from   {transform:translate3d(0px,0px,0px)}
+          to {transform: translate3d(200px,200px,0px)}
+        }
+
+        /* Standard syntax */
+        @keyframes myfirst {
+          from   {transform:translate3d(0px,0px,0px)}
+          to {transform: translate3d(200px,200px,0px)}
+        }</code></pre>
+        <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/raNvEK/'>css animation</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+        </div>
+
+</div>
+
+<div id="css_animation_png_image" class="step" data-x="4000" data-y="1500">
+      <p>Css animation + png image</p>
+      <p data-height="601" data-theme-id="0" data-slug-hash="jEOxgL" data-default-tab="result" data-user="ilyabasiuk" class='codepen'>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/jEOxgL/'>css animation + png image</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+
+</div>
+
+
+
+<div id="request_animation_frame" class="step" data-x="4000" data-y="3000">
+      <p>Request animation frame</p>
+              <div data-height="602" data-theme-id="0" data-slug-hash="dPyexB" data-default-tab="js" data-user="ilyabasiuk" class='codepen'><pre><code>    var label = document.querySelector(&quot;.group&quot;),
+            move = function (){
+              var timePassed =  Date.now() -  startTime,
+                  xOffset = Math.round(verticalSpeed * timePassed),
+                  yOffset = Math.round(horisontalSpeed * timePassed)
+
+               ,xOffset = verticalSpeed * timePassed,
+               yOffset = horisontalSpeed * timePassed
+              ;
+
+              if (xOffset &lt;= toX) {
+                label.setAttribute(&quot;transform&quot;, &quot;translate (&quot; + xOffset + &quot;, &quot;+ yOffset+&quot;)&quot;);
+              } else {
+                label.setAttribute(&quot;transform&quot;, &quot;translate (0,0)&quot;);
+                startTime = Date.now();
+              }
+              requestAnimationFrame(move);
+            };
+
+            var  duration = 40 * 1000,
+                toY = 400,
+                toX = 400,
+                verticalSpeed = toY/duration,
+                horisontalSpeed = toX/duration,
+                startTime = Date.now();
+            move();</code></pre>
+        <p>See the Pen <a href='http://codepen.io/ilyabasiuk/pen/dPyexB/'>request animation frame</a> by ilya (<a href='http://codepen.io/ilyabasiuk'>@ilyabasiuk</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+        </div>
+</div>
 
   <!--  <div id="css" class="step" data-x="-3000" data-y="0">
         <p>CSS - Анимация</p><br/><br/>

@@ -1,11 +1,11 @@
 
 var perfomansceTestHelper = function (options) {
-    var
+  var
     addBtn = options.addButton,
     clearBtn = options.clearButton,
     templ = options.canvas.querySelector("g"),
     count = 0,
-    vehicles = [];
+    vehicles = [],
     init = function() {
         addBtn.addEventListener("click", add);
         options.canvas.addEventListener("click", add);
@@ -13,29 +13,40 @@ var perfomansceTestHelper = function (options) {
 
         var vehicle = document.getElementById("vehicle");
 
-var  duration = 10 * 1000,
-     toY = -100,
-     toX = 100,
-     verticalSpeed = toY/duration,
-     horisontalSpeed = toX/duration,
-     startTime = Date.now();
-
+        var  duration = 10 * 1000,
+         toY = -100,
+         toX = 100,
+         verticalSpeed = toY/duration,
+         horisontalSpeed = toX/duration,
+         startTime = Date.now();
     },
     move = function (){
       vehicles.forEach(function(vehicle) {
             var timePassed =  Date.now() -  vehicle.data.startTime,
                 xOffset = vehicle.data.fromX + vehicle.data.horisontalSpeed * timePassed,
-                yOffset =vehicle.data.fromY + vehicle.data.verticalSpeed * timePassed;
-            if (xOffset <= vehicle.data.toX) {
-             vehicle.shape.setAttribute("transform", "translate (" +  xOffset + ", " + yOffset+")");
-           } else {
-             vehicle.shape.setAttribute("transform", "translate ("+vehicle.data.fromX+","+vehicle.data.fromY+")");
+                yOffset =vehicle.data.fromY + vehicle.data.verticalSpeed * timePassed,
+                condition = function(startX, endX) {
+                  if (startX < endX) {
+                    return function(curX) {
+                        return curX <= endX;
+                    }
+                  } else {
+                    return function(curX) {
+                        return curX >= endX
+                    }
+                  }
+                }(vehicle.data.fromX,vehicle.data.toX);
+            if (condition(xOffset)) {
+             vehicle.shape.setAttribute("transform", "translate (" + ( xOffset -  pos.x)+ ", " + (yOffset  - pos.y) +")");
+            } else {
+             vehicle.shape.setAttribute("transform", "translate (" + (vehicle.data.fromX +  - pos.x) +","+ (vehicle.data.fromY +  - pos.y)+")");
              vehicle.data.startTime = Date.now();
-           }
+            }
       });
 
       requestAnimationFrame(move);
-   },
+    },
+
     add = function() {
         var label = templ.cloneNode(true);
         label.style.display = "";
@@ -47,7 +58,7 @@ var  duration = 10 * 1000,
               data: animData,
               shape: label
         });
-
+        console.log(vehicles.length);
         if (count === 0) {
           move();
         }
@@ -68,39 +79,40 @@ var  duration = 10 * 1000,
     getRnd = function(min, max)  {
         return Math.floor((Math.random() * max) + min);
     },
+    pos,
     createRndAnimation = function() {
       var width = options.canvas.width.baseVal.value,
           height = options.canvas.height.baseVal.value,
           tmplBox = templ.getBBox();
-          curPos = {x: templ.querySelector("circle").getAttribute("cx"), y: templ.querySelector("circle").getAttribute("cy")}
+          curPos = {x: templ.querySelector("circle").getAttribute("cx"), y: templ.querySelector("circle").getAttribute("cy")},
          getRnd = function(min, max)  {
              return Math.random() * (max - min) + min;
          },
          getRndX = function() {
-           return  getRnd(0, width - 100) - curPos.x + 100;
+           return  getRnd(0, width - 100);
          },
          getRndY =  function() {
-           return   getRnd(0, height - 100) - curPos.y + 100;
+           return   getRnd(0, height - 100);
          },
          startPosX = getRndX() ,
          startPosY =  getRndY();
 
+        pos = curPos;
         return createMotionAnimation(startPosX, startPosY, getRndX(), getRndY(), getRnd(5,20));
     },
     i = 0,
-    createMotionAnimation = function(startPosX, startPosY, horizontalOffset, verticalOffset, duration) {
+    createMotionAnimation = function(startPosX, startPosY, toX, toY, duration) {
       i++;
-      console.log(startPosX, startPosY, horizontalOffset, verticalOffset, duration);
+console.log(startPosX, startPosY, toX, toY, duration);
       duration = duration  *1000;
       var animData= {
           startTime : Date.now(),
           fromX: startPosX,
           fromY: startPosY,
-          horisontalSpeed: (horizontalOffset - startPosX)/duration,
-          verticalSpeed: (verticalOffset-startPosX)/duration,
-          toX: horizontalOffset,
-          toY: verticalOffset
-
+          horisontalSpeed: (toX - startPosX)/duration,
+          verticalSpeed: (toY-startPosY)/duration,
+          toX: toX,
+          toY: toY
       };
 
        return animData;

@@ -270,13 +270,16 @@ a:focus {
 }
 
  h1 {
-    font-size: 190px;
+    font-size: 130px;
 
     -webkit-transform: translateZ(50px);
     -moz-transform:    translateZ(50px);
     -ms-transform:     translateZ(50px);
     -o-transform:      translateZ(50px);
     transform:         translateZ(50px);
+}
+h4 {
+  font-size: 70px;
 }
 demo {
   display: none;

@@ -1,9 +1,121 @@
 <html>
   <head>
       <title> Rotation Demo </title>
+      <script src = "//cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
+      <script src = "js/trigonometry.js"></script>
+      <script>
+        var curentPosition = {x: 400, y:66, bearing: 120},
+            newLog = {x:630, y: 260, bearing: 170},
+            r = 3,
+            initialRotationAngle = -90,
+            shape = function() {
+                var radiuses = [1, 1, 1],
+                    angles = [0, 0.8 * Math.PI, 1.2 * Math.PI],
+                    i,
+                    getPathString = function (x, y, radius, bearing) {
+                        var currentAngles = angles.slice(),
+                            currentRadiuses = radiuses.slice(),
+                            points = [], px, py,
+                            baseAngle = (bearing + initialRotationAngle) * Math.PI/180;
+                        for (i = 0; i < currentAngles.length; i++){
+                            currentAngles[i] += baseAngle;
+                            px = x + currentRadiuses[i] * radius * Math.cos(currentAngles[i]);
+                            py = y + currentRadiuses[i] * radius * Math.sin(currentAngles[i]);
+
+                            points.push(Math.round(px).toString() + " " + Math.round(py).toString());
+                        }
+
+                        return "M" + points.join("L") + "Z";
+                    };
+
+                return {
+                    draw: function(canvas, x, y, bearing, backgroundColor){
+                        var drawnShape;
+
+                        drawnShape = canvas.path(getPathString(x, y, 17, bearing));
+
+                        return  drawnShape.attr("fill", backgroundColor);
+                    },
+                    modify : function(shape, x, y,  radius, bearing) {
+                        shape.setAttribute("d",getPathString(x, y,  radius, bearing));
+                    }
+                }
+            }(),
+            createAnimationObject = function(path, duration) {
+                var animation = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
+                    animation.setAttribute("begin", "indefinite");
+                    animation.setAttribute("end", "indefinite");
+                    animation.setAttribute("dur",  duration + "s");
+                    animation.setAttribute("fill", "freeze");
+                    animation.setAttribute("path", path);
+                    animation.setAttribute("rotate", "auto");
+
+
+                    return animation;
+            },
+            initScene = function(canvas, curPos, newLog) {
+                var getCurvePath = function(startPoint, endPoint, intPoint) {
+                      //  return "m " + 0 + " " + 0 + " q " +  (intPoint.x - startPoint.x) + " " +
+                      //      (intPoint.y - startPoint.y) + " " + (endPoint.x - startPoint.x) + " " + (endPoint.y - startPoint.y);
+                        return "M " + startPoint.x + " " + startPoint.y + " Q " +  intPoint.x + " " +
+                                intPoint.y + " " + endPoint.x + " " + endPoint.y ;
+                    },
+                    startPoint = canvas.circle(curPos.x, curPos.y, r)
+                                  .attr({"fill": "yellow", "stroke": "black"}),
+                    startAddit = trigonometry.getSecondPoint(curPos, curPos.bearing, 500),
+                    newAddit = trigonometry.getSecondPoint(newLog, newLog.bearing, -200),
+                    intPoint = trigonometry.getIntersectionPoint(curPos,startAddit, newLog, newAddit),
+                    path = getCurvePath(curPos, newLog, intPoint);
+
+                    canvas.circle(startAddit.x, startAddit.y, r)
+                                      .attr({"fill": "yellow", "stroke": "black"});
+
+                    canvas.line(curPos.x, curPos.y, startAddit.x, startAddit.y)
+                                      .attr({"stroke":"blue"});
+
+                    canvas.circle(newLog.x, newLog.y, r)
+                                      .attr({"fill": "red", "stroke": "black"});
+
+                    canvas.circle(newAddit.x, newAddit.y, r)
+                                      .attr({"fill": "green", "stroke": "black"});
+
+                    canvas.line(newLog.x, newLog.y, newAddit.x, newAddit.y)
+                                      .attr({"stroke":"blue"});
+
+                    canvas.circle(intPoint.x, intPoint.y, r)
+                                      .attr({"fill": "blue", "stroke": "black"});
+
+                    canvas.path(path)
+                    .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+                    var vehicle = shape.draw(canvas, curPos.x, curPos.y, curPos.bearing, "#1300BD"),
+                        anim = createAnimationObject(path, 5);
+
+                    vehicle.node.appendChild(anim);
+                    anim.beginElement();
+            };
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            initScene(  Snap("#svg_basic"), curentPosition, newLog);
+        });
+      </script>
   </head>
 
   <body>
-    
+  <!--   <div id ="svg_basic" style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";> </div>-->
+ <svg id ="svg_basic" width="1200px" height="600px" viewBox="0 0 1200 600"
+     style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
+     version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+
+
+       <!-- Additioanl elements -->
+  <!--     <circle cx= 400 cy= 66 r =3 fill="yellow" stroke = "black" />
+       <line x1="400" y1="66" x2="800" y2="280" stroke = "blue" />
+     <circle cx= 630 cy= 260 r =3 fill="red" stroke = "black" />
+-->     </svg>
+
   </body>
 </html>

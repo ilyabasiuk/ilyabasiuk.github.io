@@ -58,6 +58,18 @@
 
                     return animation;
             },
+            createRotationAnimation = function(fromAngle, toAngle, point, duration, callback) {
+                var animation = document.createElementNS("http://www.w3.org/2000/svg", "animateTransform");
+                    animation.setAttribute("begin", "indefinite");
+                    animation.setAttribute("end", "indefinite");
+                    animation.setAttribute("dur",  duration + "s");
+                    animation.setAttribute("attributeName", "transform");
+                    animation.setAttribute("type", "rotate");
+                    animation.setAttribute("from", [0, point.x, point.y].join(" "));
+                    animation.setAttribute("to", [toAngle - fromAngle, point.x, point.y].join(" "));
+
+                    return animation;
+            },
             getCurvePath = function(startPoint, endPoint, intPoint) {
                     return "M " + startPoint.x + " " + startPoint.y + "m " + 0 + " " + 0 + " q " +  (intPoint.x - startPoint.x) + " " +
                         (intPoint.y - startPoint.y) + " " + (endPoint.x - startPoint.x) + " " + (endPoint.y - startPoint.y);
@@ -168,6 +180,72 @@
                       data.callback && data.callback();
                   });
             });
+
+            initScene(  Snap("#svg_basic2"), curentPosition, newLog, function(data) {
+                  var canvas = data.canvas,
+                      path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
+                      path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
+                      calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
+
+                      canvas.path(path1)
+                      .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+
+                  var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
+                      anim = createAnimationObject(path, 5, false),
+                      rotAnim = createRotationAnimation(curentPosition.bearing, newLog.bearing,curentPosition, 5);
+
+                  vehicle.node.appendChild(anim);
+                  vehicle.node.appendChild(rotAnim);
+                  anim.beginElement();
+                  rotAnim.beginElement();
+
+                  anim.addEventListener("endEvent",function() {
+                      vehicle.remove();
+                      data.callback && data.callback();
+                  });
+
+            });
+
+            initScene(  Snap("#svg_basic3"), curentPosition, newLog, function(data) {
+                  var canvas = data.canvas,
+                      path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
+                      path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
+                      calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
+
+                      canvas.path(path1)
+                      .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+
+                  var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
+                      anim = createAnimationObject(path, 5, false),
+                      rotAnim = createRotationAnimation(curentPosition.bearing, calcBearing, curentPosition, 1);
+
+                vehicle.node.appendChild(rotAnim);
+                rotAnim.beginElement();
+
+                rotAnim.addEventListener("endEvent", function() {
+                      vehicle.remove();
+                      vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, calcBearing, "#1300BD"),
+                      runAnimation(vehicle, curentPosition, newLog, 5, function() {
+                         vehicle.remove();
+                         vehicle = shape.draw(canvas, newLog.x, newLog.y, calcBearing, "#1300BD");
+                         rotAnim = createRotationAnimation(calcBearing, newLog.bearing, newLog, 1);
+
+                         vehicle.node.appendChild(rotAnim);
+                         rotAnim.beginElement();
+
+                         rotAnim.addEventListener("endEvent", function() {
+                            vehicle.remove();
+                            data.callback && data.callback();
+                          });
+                      });
+
+                });
+
+
+
+            });
         });
       </script>
   </head>
@@ -249,24 +327,53 @@
           </animateMotion>
         </g>
     </svg>
-
+    <div>
+      1. Basic example. It is way how it's working now.
+    </div>
     <svg id ="svg_basic" width="1200px" height="600px" viewBox="0 0 1200 600"
        style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
        version="1.1" xmlns="http://www.w3.org/2000/svg"
        xmlns:xlink="http://www.w3.org/1999/xlink">
-      <!-- <g  >
-            <path d = "M 40 10 M 50 50 L 100 100" stroke="black" stroke-width = "2"> </path>
-
-            <path d = "M 40 100 m 50 100 l 50 50" stroke="blue" stroke-width = "2"> </path>
-
-       </g>
-     -->
     </svg>
+
+    <div>
+      2. Rotation as separate animtion. <br>
+        Adv:   Enought easy to implement, we just need to take into consideration
+      the time we spent on rotation. <br>
+        Disadv: Looks not natural.
+    </div>
+    <svg id ="svg_basic3" width="1200px" height="600px" viewBox="0 0 1200 600"
+      style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
+      version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+    </svg>
+
+    <div>
+      3. Combined animation. <br>
+         Adv: The easies options to implement. <br>
+         Disadv: We will have to calculate not only lat and lng, but the bearing also. Looks also not natural.
+    </div>
+    <svg id ="svg_basic2" width="1200px" height="600px" viewBox="0 0 1200 600"
+      style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
+      version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+    </svg>
+    <div>
+      4. Motion along the path with rotation.<br>
+         Disadv: There are really many problems with it:  getting calculated position and bearing; <br>
+         I have used bezier curve path for, but it is not suitable for all cases, so we will need to create any logic for the creating pathes;<br>
+         it also requirs aaditonal transformation of vehicle, what makes the logic much more complicated. to simplify it: we have to rendering logic (should be testing well) <br>
+         also requires a llitle bit more efforts to implement it for requestAnimationFRame animation than other options;
+         <br>
+         Adv: the most natural option. If we are going to implement motion on  the street graph we could get from OSM, it will be enough easy to do after implementing this option.
+
+    </div>
     <svg id ="svg_basic1" width="1200px" height="600px" viewBox="0 0 1200 600"
       style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
       version="1.1" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink">
     </svg>
+
 </div>
 
 

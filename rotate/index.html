@@ -2,6 +2,11 @@
   <head>
       <title> Rotation Demo </title>
       <script src = "//cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
+      <style>
+            svg {
+              margin: 20px;
+            }
+      </style>
       <script src = "js/trigonometry.js"></script>
       <script>
         var curentPosition = {x: 400, y:66, bearing: 120},
@@ -41,31 +46,41 @@
                     }
                 }
             }(),
-            createAnimationObject = function(path, duration) {
+            createAnimationObject = function(path, duration, rotate) {
                 var animation = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
                     animation.setAttribute("begin", "indefinite");
                     animation.setAttribute("end", "indefinite");
                     animation.setAttribute("dur",  duration + "s");
                     animation.setAttribute("fill", "freeze");
                     animation.setAttribute("path", path);
-                    animation.setAttribute("rotate", "auto");
+                    rotate && animation.setAttribute("rotate", "auto");
 
 
                     return animation;
             },
-            initScene = function(canvas, curPos, newLog) {
-                var getCurvePath = function(startPoint, endPoint, intPoint) {
-                      //  return "m " + 0 + " " + 0 + " q " +  (intPoint.x - startPoint.x) + " " +
-                      //      (intPoint.y - startPoint.y) + " " + (endPoint.x - startPoint.x) + " " + (endPoint.y - startPoint.y);
-                        return "M " + startPoint.x + " " + startPoint.y + " Q " +  intPoint.x + " " +
-                                intPoint.y + " " + endPoint.x + " " + endPoint.y ;
-                    },
-                    startPoint = canvas.circle(curPos.x, curPos.y, r)
+            getCurvePath = function(startPoint, endPoint, intPoint) {
+                    return "M " + startPoint.x + " " + startPoint.y + "m " + 0 + " " + 0 + " q " +  (intPoint.x - startPoint.x) + " " +
+                        (intPoint.y - startPoint.y) + " " + (endPoint.x - startPoint.x) + " " + (endPoint.y - startPoint.y);
+                  //  return "M " + startPoint.x + " " + startPoint.y + " Q " +  intPoint.x + " " +
+                  //          intPoint.y + " " + endPoint.x + " " + endPoint.y ;
+            },
+            runAnimation = function(vehicle, startPoint, endPoint, duration, callback){
+                var path = "m " + 0 + " " + 0 + " l " + (endPoint.x-startPoint.x) + " " + (endPoint.y-startPoint.y);
+                    anim = createAnimationObject(path, duration, false);
+
+
+                vehicle.node.appendChild(anim);
+                anim.beginElement();
+                callback && anim.addEventListener("endEvent", function() {
+                  callback();
+                })
+            },
+            initScene = function(canvas, curPos, newLog, callback) {
+                var startPoint = canvas.circle(curPos.x, curPos.y, r)
                                   .attr({"fill": "yellow", "stroke": "black"}),
                     startAddit = trigonometry.getSecondPoint(curPos, curPos.bearing, 500),
                     newAddit = trigonometry.getSecondPoint(newLog, newLog.bearing, -200),
-                    intPoint = trigonometry.getIntersectionPoint(curPos,startAddit, newLog, newAddit),
-                    path = getCurvePath(curPos, newLog, intPoint);
+                    intPoint = trigonometry.getIntersectionPoint(curPos,startAddit, newLog, newAddit);
 
                     canvas.circle(startAddit.x, startAddit.y, r)
                                       .attr({"fill": "yellow", "stroke": "black"});
@@ -85,37 +100,175 @@
                     canvas.circle(intPoint.x, intPoint.y, r)
                                       .attr({"fill": "blue", "stroke": "black"});
 
-                    canvas.path(path)
-                    .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
 
-                    var vehicle = shape.draw(canvas, curPos.x, curPos.y, curPos.bearing, "#1300BD"),
-                        anim = createAnimationObject(path, 5);
+                    var runPreMotion = function(callback) {
+                        var preStartPoint = trigonometry.getSecondPoint(curentPosition, curentPosition.bearing, -200),
+                            vehicle = shape.draw(canvas, preStartPoint.x, preStartPoint.y, curentPosition.bearing , "#1300BD");
 
-                    vehicle.node.appendChild(anim);
-                    anim.beginElement();
-            };
+                          runAnimation(vehicle, preStartPoint, curentPosition, 3, function() {
+                             vehicle.remove();
+                             callback && callback();
+                          });
+
+                    },
+                    runPostMotion = function() {
+                        var postEndPoint =  trigonometry.getSecondPoint(newLog, newLog.bearing, 200),
+                        vehicle = shape.draw(canvas, newLog.x, newLog.y, newLog.bearing , "#1300BD");
+
+                        runAnimation(vehicle, newLog, postEndPoint, 3, function() {
+                           vehicle.remove();
+                          // callback && callback();
+                        });
+
+                    };
+
+                    runPreMotion(function(){
+                          callback && callback({
+                                        canvas: canvas,
+                                        intPoint: intPoint,
+                                        callback: runPostMotion});
+                    })};
 
         document.addEventListener("DOMContentLoaded", function(event) {
-            initScene(  Snap("#svg_basic"), curentPosition, newLog);
+            initScene(  Snap("#svg_basic"), curentPosition, newLog, function(data) {
+                  var canvas = data.canvas,
+                      path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
+                      path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
+                      calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
+
+                      canvas.path(path1)
+                      .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+
+                  var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, calcBearing, "#1300BD"),
+                      anim = createAnimationObject(path, 5, false);
+
+                runAnimation(vehicle, curentPosition, newLog, 5, function() {
+                   vehicle.remove();
+                   data.callback && data.callback();
+                });
+
+            });
+            initScene(  Snap("#svg_basic1"), curentPosition, newLog, function(data) {
+                  var canvas = data.canvas,
+                  path = getCurvePath(curentPosition, newLog, data.intPoint);
+                  canvas.path(path)
+                  .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+                  var
+                      vehicle = shape.draw(canvas, 0, 0, curentPosition.bearing - 30, "#1300BD"),
+                      //vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
+                      anim = createAnimationObject(path, 5, true);
+
+                  vehicle.node.appendChild(anim);
+                  anim.beginElement();
+
+                  anim.addEventListener("endEvent",function() {
+                      vehicle.remove();
+                      data.callback && data.callback();
+                  });
+            });
         });
       </script>
   </head>
 
   <body>
+
+<div style="float:right; width:30%;">
+  <a href='http://www.w3.org/TR/SVG/images/animate/animMotion01.svg'> http://www.w3.org/TR/SVG/images/animate/animMotion01.svg </a><br>
+  <a href='http://tutorials.jenkov.com/svg/svg-animation.html'> http://tutorials.jenkov.com/svg/svg-animation.html </a><br>
+  <a href='https://mdn.mozillademos.org/files/3261/animateMotion.svg'>  https://mdn.mozillademos.org/files/3261/animateMotion.svg </a><br>
+  <a href='http://css-live.ru/articles/rukovodstvo-po-svg-animaciyam-smil.html'>  http://css-live.ru/articles/rukovodstvo-po-svg-animaciyam-smil.html </a><br>
+  <a href='http://codepen.io/mattsince87/pen/snqLy/'>  http://codepen.io/mattsince87/pen/snqLy/ </a> <br>
+</div>
+
   <!--   <div id ="svg_basic" style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";> </div>-->
- <svg id ="svg_basic" width="1200px" height="600px" viewBox="0 0 1200 600"
-     style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
-     version="1.1" xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink">
+<div style= "float:left; width:70%;">
+
+    <svg style = "display:none;background-color:grey" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900px" height="600px" viewBox="0 0 3000 2000" version="1.1">
+        <desc>Example animMotion01 - demonstrate motion animation computations</desc>
+        <rect x="1" y="1" width="498" height="298" fill="none" stroke="blue" stroke-width="2"/>
+
+
+        <path id="path1" d="M100,250 C 100,50 400,50 400,250" fill="none" stroke="blue" stroke-width="7.06"/>
+
+        <path id="path2" d="M150,300 C 150,100 450,100 450,300" fill="none" stroke="blue" stroke-width="7.06"/>
+
+        <path id="path3" d="m50,200 c 0,-200 300,-200 300,0" fill="none" stroke="blue" stroke-width="7.06"/>
+        <circle cx="100" cy="250" r="17.64" fill="blue"/>
+        <circle cx="250" cy="100" r="17.64" fill="blue"/>
+        <circle cx="400" cy="250" r="17.64" fill="blue"/>
+
+
+        <path id = "tr" d="M-25,-12.5 L25,-12.5 L 0,-87.5 z" fill="yellow" stroke="red" stroke-width="7.06">
+
+          <!-- Define the motion path animation -->
+        <!--  <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+             <mpath xlink:href="#path1"/>
+          </animateMotion>-->
+        </path>
+<!---
+
+  height: 75, width: 50, y: -87.5, x: -25
+
+-->
+      <rect x="-25" y="-87.5" width="50" height="75" fill="none" stroke="yellow" stroke-width="2">
+
+
+        <animateMotion dur="60s" repeatCount="indefinite"  rotate="auto">
+           <mpath xlink:href="#path1"/>
+        </animateMotion>
+      </rect>
+
+       <rect x="0" y="0" width="50" height="75" fill="none" stroke="blue" stroke-width="2">
+
+
+          <animateMotion dur="60s" repeatCount="indefinite"  rotate="auto">
+             <mpath xlink:href="#path1"/>
+          </animateMotion>
+        </rect>
+
+
+        <rect x="0" y="0" width="20" height="30" fill="none" stroke="blue" stroke-width="2">
+
+
+          <animateMotion dur="6s" repeatCount="indefinite"  rotate="auto">
+             <mpath xlink:href="#path1"/>
+          </animateMotion>
+        </rect>
+
+        <g transform = "rotate(45 0 0)">
+          <circle cx=50 cy=50 r=6 fill="yellow"></circle>
+          <rect x="50" y="50" width="20" height="30" fill="none" stroke="blue" stroke-width="2">
 
 
 
+          </rect>
+          <animateMotion dur="60s" repeatCount="indefinite"  rotate="auto" >
+             <mpath xlink:href="#path3"/>
+          </animateMotion>
+        </g>
+    </svg>
 
-       <!-- Additioanl elements -->
-  <!--     <circle cx= 400 cy= 66 r =3 fill="yellow" stroke = "black" />
-       <line x1="400" y1="66" x2="800" y2="280" stroke = "blue" />
-     <circle cx= 630 cy= 260 r =3 fill="red" stroke = "black" />
--->     </svg>
+    <svg id ="svg_basic" width="1200px" height="600px" viewBox="0 0 1200 600"
+       style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
+       version="1.1" xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink">
+      <!-- <g  >
+            <path d = "M 40 10 M 50 50 L 100 100" stroke="black" stroke-width = "2"> </path>
+
+            <path d = "M 40 100 m 50 100 l 50 50" stroke="blue" stroke-width = "2"> </path>
+
+       </g>
+     -->
+    </svg>
+    <svg id ="svg_basic1" width="1200px" height="600px" viewBox="0 0 1200 600"
+      style ="background-image:url('http://ilyabasiuk.github.io/rotate/img/demo_map.png?ddf=dfsw')";
+      version="1.1" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+    </svg>
+</div>
+
 
   </body>
 </html>

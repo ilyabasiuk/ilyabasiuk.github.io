@@ -92,10 +92,18 @@
                                   .attr({"fill": "yellow", "stroke": "black"}),
                     startAddit = trigonometry.getSecondPoint(curPos, curPos.bearing, 500),
                     newAddit = trigonometry.getSecondPoint(newLog, newLog.bearing, -200),
-                    intPoint = trigonometry.getIntersectionPoint(curPos,startAddit, newLog, newAddit);
-
-                    canvas.circle(startAddit.x, startAddit.y, r)
+                    intPoint = trigonometry.getIntersectionPoint(curPos,startAddit, newLog, newAddit),
+                    startCircle = canvas.circle(startAddit.x, startAddit.y, r)
                                       .attr({"fill": "yellow", "stroke": "black"});
+              //  startCircle.drag(null,
+              //                 function(){
+              //                     console.log("Move started");
+              //                 },
+              //                 function(){
+              //                     console.log("Move stopped");
+              //                 }
+              //         );
+
 
                     canvas.line(curPos.x, curPos.y, startAddit.x, startAddit.y)
                                       .attr({"stroke":"blue"});
@@ -139,119 +147,122 @@
                                         canvas: canvas,
                                         intPoint: intPoint,
                                         callback: runPostMotion});
-                    })};
+                    })
+                }, i
+                initAll = function() {
+                    initScene(  Snap("#svg_basic"), curentPosition, newLog, function(data) {
+                          var canvas = data.canvas,
+                              path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
+                              path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
+                              calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
+
+                              canvas.path(path1)
+                              .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+
+                          var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, calcBearing, "#1300BD"),
+                              anim = createAnimationObject(path, 5, false);
+
+                        runAnimation(vehicle, curentPosition, newLog, 5, function() {
+                           vehicle.remove();
+                           data.callback && data.callback();
+                        });
+
+                    });
+                    initScene(  Snap("#svg_basic1"), curentPosition, newLog, function(data) {
+                          var canvas = data.canvas,
+                          path = getCurvePath(curentPosition, newLog, data.intPoint);
+                          canvas.path(path)
+                          .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+                          var
+                              vehicle = shape.draw(canvas, 0, 0, curentPosition.bearing - 30, "#1300BD"),
+                              //vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
+                              anim = createAnimationObject(path, 5, true);
+
+                          vehicle.node.appendChild(anim);
+                          anim.beginElement();
+
+                          anim.addEventListener("endEvent",function() {
+                              vehicle.remove();
+                              data.callback && data.callback();
+                          });
+                    });
+
+                    initScene(  Snap("#svg_basic2"), curentPosition, newLog, function(data) {
+                          var canvas = data.canvas,
+                              path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
+                              path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
+                              calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
+
+                              canvas.path(path1)
+                              .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+
+                          var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
+                              anim = createAnimationObject(path, 5, false),
+                              rotAnim = createRotationAnimation(curentPosition.bearing, newLog.bearing,curentPosition, 5);
+
+                          vehicle.node.appendChild(anim);
+                          vehicle.node.appendChild(rotAnim);
+                          anim.beginElement();
+                          rotAnim.beginElement();
+
+                          anim.addEventListener("endEvent",function() {
+                              vehicle.remove();
+                              data.callback && data.callback();
+                          });
+
+                    });
+
+                    initScene(  Snap("#svg_basic3"), curentPosition, newLog, function(data) {
+                          var canvas = data.canvas,
+                              path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
+                              path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
+                              calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
+
+                              canvas.path(path1)
+                              .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
+
+
+                          var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
+                              anim = createAnimationObject(path, 5, false),
+                              rotAnim = createRotationAnimation(curentPosition.bearing, calcBearing, curentPosition, 1);
+
+                        vehicle.node.appendChild(rotAnim);
+                        rotAnim.beginElement();
+
+                        rotAnim.addEventListener("endEvent", function() {
+                              vehicle.remove();
+                              vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, calcBearing, "#1300BD"),
+                              runAnimation(vehicle, curentPosition, newLog, 5, function() {
+                                 vehicle.remove();
+                                 vehicle = shape.draw(canvas, newLog.x, newLog.y, calcBearing, "#1300BD");
+                                 rotAnim = createRotationAnimation(calcBearing, newLog.bearing, newLog, 1);
+
+                                 vehicle.node.appendChild(rotAnim);
+                                 rotAnim.beginElement();
+
+                                 rotAnim.addEventListener("endEvent", function() {
+                                    vehicle.remove();
+                                    data.callback && data.callback();
+                                  });
+                              });
+
+                        });
+                    });
+                };
 
         document.addEventListener("DOMContentLoaded", function(event) {
-            initScene(  Snap("#svg_basic"), curentPosition, newLog, function(data) {
-                  var canvas = data.canvas,
-                      path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
-                      path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
-                      calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
-
-                      canvas.path(path1)
-                      .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
-
-
-                  var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, calcBearing, "#1300BD"),
-                      anim = createAnimationObject(path, 5, false);
-
-                runAnimation(vehicle, curentPosition, newLog, 5, function() {
-                   vehicle.remove();
-                   data.callback && data.callback();
-                });
-
-            });
-            initScene(  Snap("#svg_basic1"), curentPosition, newLog, function(data) {
-                  var canvas = data.canvas,
-                  path = getCurvePath(curentPosition, newLog, data.intPoint);
-                  canvas.path(path)
-                  .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
-
-                  var
-                      vehicle = shape.draw(canvas, 0, 0, curentPosition.bearing - 30, "#1300BD"),
-                      //vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
-                      anim = createAnimationObject(path, 5, true);
-
-                  vehicle.node.appendChild(anim);
-                  anim.beginElement();
-
-                  anim.addEventListener("endEvent",function() {
-                      vehicle.remove();
-                      data.callback && data.callback();
-                  });
-            });
-
-            initScene(  Snap("#svg_basic2"), curentPosition, newLog, function(data) {
-                  var canvas = data.canvas,
-                      path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
-                      path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
-                      calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
-
-                      canvas.path(path1)
-                      .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
-
-
-                  var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
-                      anim = createAnimationObject(path, 5, false),
-                      rotAnim = createRotationAnimation(curentPosition.bearing, newLog.bearing,curentPosition, 5);
-
-                  vehicle.node.appendChild(anim);
-                  vehicle.node.appendChild(rotAnim);
-                  anim.beginElement();
-                  rotAnim.beginElement();
-
-                  anim.addEventListener("endEvent",function() {
-                      vehicle.remove();
-                      data.callback && data.callback();
-                  });
-
-            });
-
-            initScene(  Snap("#svg_basic3"), curentPosition, newLog, function(data) {
-                  var canvas = data.canvas,
-                      path1 = "M " + curentPosition.x + " " + curentPosition.y + " L " + newLog.x + " " + newLog.y,
-                      path = "m " + 0 + " " + 0 + " l " + (newLog.x-curentPosition.x) + " " + (newLog.y-curentPosition.y),
-                      calcBearing = trigonometry.calculateBearingTo(curentPosition.x, curentPosition.y, newLog.x, newLog.y);
-
-                      canvas.path(path1)
-                      .attr({"fill":"none","stroke-width": "1", "stroke":"green"});
-
-
-                  var vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, curentPosition.bearing, "#1300BD"),
-                      anim = createAnimationObject(path, 5, false),
-                      rotAnim = createRotationAnimation(curentPosition.bearing, calcBearing, curentPosition, 1);
-
-                vehicle.node.appendChild(rotAnim);
-                rotAnim.beginElement();
-
-                rotAnim.addEventListener("endEvent", function() {
-                      vehicle.remove();
-                      vehicle = shape.draw(canvas, curentPosition.x, curentPosition.y, calcBearing, "#1300BD"),
-                      runAnimation(vehicle, curentPosition, newLog, 5, function() {
-                         vehicle.remove();
-                         vehicle = shape.draw(canvas, newLog.x, newLog.y, calcBearing, "#1300BD");
-                         rotAnim = createRotationAnimation(calcBearing, newLog.bearing, newLog, 1);
-
-                         vehicle.node.appendChild(rotAnim);
-                         rotAnim.beginElement();
-
-                         rotAnim.addEventListener("endEvent", function() {
-                            vehicle.remove();
-                            data.callback && data.callback();
-                          });
-                      });
-
-                });
-
-
-
-            });
+                initAll();
         });
       </script>
   </head>
 
   <body>
-
+<div style = "position: fixed; left: 65%;top: 40px;">
+    <input type="button" value= "update" onClick ="initAll()"/>
+</div>
 <div style="float:right; width:30%;">
   <a href='http://www.w3.org/TR/SVG/images/animate/animMotion01.svg'> http://www.w3.org/TR/SVG/images/animate/animMotion01.svg </a><br>
   <a href='http://tutorials.jenkov.com/svg/svg-animation.html'> http://tutorials.jenkov.com/svg/svg-animation.html </a><br>

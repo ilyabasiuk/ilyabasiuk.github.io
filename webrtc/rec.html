@@ -24,47 +24,28 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || 
 
 var pc; // PeerConnection
 
-
-// Step 1. getUserMedia
-navigator.getUserMedia(
-  { audio: true, video: true },
-  gotStream,
-  function(error) { console.log(error) }
-);
-
-function gotStream(stream) {
-  document.getElementById("callButton").style.display = 'inline-block';
-  document.getElementById("localVideo").src = URL.createObjectURL(stream);
-
-  pc = new PeerConnection(null);
-  pc.addStream(stream);
-  pc.onicecandidate = onIceCandidate;
-  pc.onaddstream = onAddStream;
-}
+pc = new PeerConnection(null);
+//pc.addStream(stream);
+pc.onicecandidate = gotIceCandidate;
+pc.onaddstream = gotRemoteStream;
 
 
-// Step 2. createOffer
-function createOffer() {
-  pc.createOffer(
-    function(desc) {
-      console.log("Oh, he he got local descriptor", desc);
-      pc.setLocalDescription(desc, function() {
-          // send the offer to a server that can negotiate with a remote client
-          sendMessage(desc);
-      });
 
+// Step 3. createAnswer
+function createAnswer() {
+  pc.createAnswer(
+    function(answer) {
+        pc.setLocalDescription(answer, function() {
+            // send the answer to the remote connection
+            sendMessage(answer);
+        });
     },
     function(error) { console.log(error) },
-    { 'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
+    { 'mandatory': { 'OfferToReceiveAudio': false, 'OfferToReceiveVideo': false } }
   );
-  //,
-  //{ 'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
-
 }
 
-
-
-function onIceCandidate(event){
+function gotIceCandidate(event){
   if (event.candidate) {
     sendMessage({
       type: 'candidate',
@@ -75,9 +56,9 @@ function onIceCandidate(event){
   }
 }
 
-function onAddStream(event){
-  document.getElementById("remoteVideo").src = URL.createObjectURL(event.stream);
-}
+ function gotRemoteStream(event){
+   document.getElementById("remoteVideo").src = URL.createObjectURL(event.stream);
+ }
 
 
 ////////////////////////////////////////////////
@@ -92,20 +73,18 @@ function sendMessage(message){
 
 socket.on('message', function (message){
   console.log("new Message recieved", message);
-  // if (message.type === 'offer') {
-  //   pc.setRemoteDescription(new SessionDescription(message));
-  //   createAnswer();
-  // }
-  // else
-  //
-  if (message.type === 'answer') {
+  if (message.type === 'offer') {
     pc.setRemoteDescription(new SessionDescription(message));
+    createAnswer();
   }
+  // else if (message.type === 'answer') {
+  //   pc.setRemoteDescription(new SessionDescription(message));
+  // }
   else if (message.type === 'candidate') {
     var candidate = new IceCandidate({sdpMLineIndex: message.label, candidate: message.candidate});
     pc.addIceCandidate(candidate);
   } else if (message.type === 'log') {
-    console.log(message);
+     console.log(message);
   }
 });
 

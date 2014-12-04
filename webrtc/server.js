@@ -6,7 +6,7 @@ var app = http.createServer(function (req, res) {
 }).listen(1234);
 
 var io = require('socket.io').listen(app);
-
+console.log("started");
 io.sockets.on('connection', function (socket) {
 	function log() {
 		var array = [">>> "];
@@ -18,6 +18,7 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('message', function (message) {
 		log('Got message: ', message);
+		console.log('Got message: ', message);
 		socket.broadcast.emit('message', message); // should be room only
 	});
 

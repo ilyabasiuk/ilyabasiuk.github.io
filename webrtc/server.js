@@ -6,7 +6,7 @@ var app = http.createServer(function (req, res) {
 }).listen(1234);
 
 var io = require('socket.io').listen(app);
-console.log("started");
+
 io.sockets.on('connection', function (socket) {
 	function log() {
 		var array = [">>> "];
@@ -18,11 +18,12 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('message', function (message) {
 		log('Got message: ', message);
-		console.log('Got message: ', message);
+		//console.log('Got message: ', message);
 		socket.broadcast.emit('message', message); // should be room only
 	});
 
 	socket.on('create or join', function (room) {
+console.log("create or join");
 		var numClients = io.sockets.clients(room).length;
 
 		log('Room ' + room + ' has ' + numClients + ' client(s)');

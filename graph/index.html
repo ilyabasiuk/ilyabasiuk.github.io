@@ -74,7 +74,8 @@
           var temp = new Date(timestamp);
 
           //logs.count = countLogs;
-          logs.avg  = analyzer.get(timestamp);
+
+          logs.avg  = analyzer.get(timestamp) * 1.3;
           //logs.median = analyzer.getMed(timestamp);
 
       //    console.log(countLogs + "  " +   temp.getHours() + ":" + temp.getMinutes() + ":" +  temp.getSeconds(), logs.avg );

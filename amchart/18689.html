@@ -1,24 +1,90 @@
+<!DOCTYPE html>
 <html>
     <head>
         <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
         <script src="https://www.amcharts.com/lib/3/serial.js"></script>
         <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+        <style>
+            body {
+                margin: 0;  
+            }
+        </style>
     </head>
-    <body>
-        <div  id="chart" view_id="chart" style=" height: 300px; "> </div>
-        <script>
-            var el = document.getElementById("chart");
- el.style.width = window.innerWidth + "px";
+    <body >
+        <div id="chart" view_id="chart" style="width: 100%; height: 549px;">
+        <script type="text/javascript" charset="utf-8">
+            var chartData = generateChartData();
+            var chart = AmCharts.makeChart("chart", {
+                "type": "serial",
+                "theme": "light",
+                "marginRight": 80,
+                "autoMarginOffset": 20,
+                "marginTop": 7,
+                "dataProvider": chartData,
+                "valueAxes": [{
+                    "axisAlpha": 0.2,
+                    "dashLength": 1,
+                    "position": "left"
+                }],
+                "mouseWheelZoomEnabled": true,
+                "graphs": [{
+                    "id": "g1",
+                    "balloonText": "[[value]]",
+                    "bullet": "round",
+                    "bulletBorderAlpha": 1,
+                    "bulletColor": "#FFFFFF",
+                    "hideBulletsCount": 50,
+                    "title": "red line",
+                    "valueField": "visits",
+                    "useLineColorForBulletBorder": true,
+                    "balloon":{
+                        "drop":true
+                    }
+                }],
+                "chartScrollbar": {
+                    "autoGridCount": true,
+                    "graph": "g1",
+                    "scrollbarHeight": 40
+                },
+                "chartCursor": {
+                "limitToGraph":"g1"
+                },
+                "categoryField": "date",
+                "categoryAxis": {
+                    "parseDates": true,
+                    "axisColor": "#DADADA",
+                    "dashLength": 1,
+                    "minorGridEnabled": true
+                },
+                "export": {
+                    "enabled": true
+                }
+            });
 
-               
-var data = [{"date":"7/1/14","property":90.5,"segment":78.4,"rank":"2 of 7","rate":1},{"date":"8/1/14","property":94.8,"segment":86.3,"rank":"3 of 7","rate":1},{"date":"9/1/14","property":94.7,"segment":90.8,"rank":"2 of 6","rate":1},{"date":"10/1/14","property":95.8,"segment":91.7,"rank":"2 of 6","rate":1},{"date":"11/1/14","property":91.5,"segment":88.4,"rank":"2 of 6","rate":1},{"date":"12/1/14","property":93.3,"segment":90.4,"rank":"3 of 6","rate":1},{"date":"1/1/15","property":68.9,"segment":71.9,"rank":"4 of 6","rate":1},{"date":"2/1/15","property":81.1,"segment":81.4,"rank":"3 of 6","rate":1},{"date":"3/1/15","property":87.1,"segment":86.4,"rank":"3 of 6","rate":1},{"date":"4/1/15","property":88.3,"segment":89.6,"rank":"4 of 6","rate":1},{"date":"5/1/15","property":89.7,"segment":91.6,"rank":"4 of 6","rate":1},{"date":"6/1/15","property":90.9,"segment":91.9,"rank":"4 of 6","rate":1},{"date":"7/1/15","property":87,"segment":88.5,"rank":"5 of 6","rate":1},{"date":"8/1/15","property":85.5,"segment":87.1,"rank":"5 of 6","rate":1},{"date":"9/1/15","property":90.8,"segment":89.7,"rank":"4 of 6","rate":1},{"date":"10/1/15","property":88.2,"segment":90.6,"rank":"3 of 6","rate":1},{"date":"11/1/15","property":85,"segment":88.1,"rank":"4 of 6","rate":1},{"date":"12/1/15","property":90.7,"segment":93.5,"rank":"4 of 6","rate":1}];
-		
-var config = {"type":"serial","backgroundAlpha":1,"bullet":"round","dataProvider":[],"marginBottom":30,"marginRight":25,"valueAxes":[{"id":"cur","title":"","axisColor":"#000","axisThickness":0.5,"gridAlpha":0.2,"axisAlpha":0.9,"position":"left"}],"graphs":[],"chartCursor":{"cursorPosition":"mouse"},"categoryField":"date","categoryAxis":{"axisColor":"#888","boldLabels":true,"gridCount":70,"gridAlpha":0.2,"autoGridCount":false,"twoLineMode":true,"markPeriodChange":false,"centerLabelOnFullPeriod":false,"equalSpacing":true,"parseDates":true},"chartScrollbar":{"autoGridCount":true,"graph":"property","scrollbarHeight":30,"selectedBackgroundColor":"#ABABAB"}};
 
-config.graphs = [{"lineColor":"#A30003","bullet":"round","valueField":"property","id":"property","lineAlpha":0.3,"lineThickness":2,"bulletBorderAlpha":0.2,"bulletBorderThickness":5,"bulletSize":7},{"lineColor":"#0000E4","bullet":"round","valueField":"segment","id":"segment","lineAlpha":0.3,"lineThickness":2,"bulletBorderAlpha":0.2,"bulletBorderThickness":5,"bulletSize":7}];
 
-config.dataProvider = data;
-var chart = AmCharts.makeChart("chart", config);
+            // generate some random data, quite different range
+            function generateChartData() {
+                var chartData = [];
+                var firstDate = new Date();
+                firstDate.setDate(firstDate.getDate() - 5);
+
+                for (var i = 0; i < 1000; i++) {
+                    // we create date objects here. In your data, you can have date strings
+                    // and then set format of your dates using chart.dataDateFormat property,
+                    // however when possible, use date objects, as this will speed up chart rendering.
+                    var newDate = new Date(firstDate);
+                    newDate.setDate(newDate.getDate() + i);
+
+                    var visits = Math.round(Math.random() * (40 + i / 5)) + 20 + i;
+
+                    chartData.push({
+                        date: newDate,
+                        visits: visits
+                    });
+                }
+                return chartData;
+            }
         </script>
     </body>
 </html>
